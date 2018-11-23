@@ -45,7 +45,7 @@ Search for the role that has been set up and attached to the instance by the Clo
 ![alt text](/res/S1F2%20KMSinitRole.png)
 <**Figure-2**>
 
-Click on the role and then on "**Attach Policy**" button, we are going to provide permissions so the instance can create Keys. A new screen where you can now search for Policies will appear.
+Click on the role and then on "**Attach Policies**" button, we are going to provide permissions so the instance can create Keys. A new screen where you can now search for Policies will appear.
 ![alt text](/res/S1F3%20AttachPolicy.png)
 <**Figure-3**>
 
@@ -84,7 +84,7 @@ As this point we can review the policy, just by clicking on it. See the operatio
 }
 ```
 
-Select the policy and click the "Attach policy"  button. The role attached to the instance is modified with his new policy and we should be able to create a Customer Master Key (CMK) now from the instance.
+Select the policy and click the "Attach policy" button at botton right of the pase. The role attached to the instance is modified with his new policy and we should be able to create a Customer Master Key (CMK) now from the instance.
 
 
 
@@ -114,10 +114,13 @@ If you go to the console and navigate to the IAM service, in the left area to th
 
 Key alias are very useful. They are easier to remenber when operating keys. Most importantly, when rotation keys, as we will see later in this section, we will not have to update our code to update it with the new KeyIDs or ARN. By using alias in our code to call the CMKs by its alias, and updating the alias CMKs to point to the newly generated key, the amount of change in our code gets minimized.
 
-Let's create it an alias, "FirstCMK",  with the command aws kms create-alias. 
+Let's create it an alias, "**FirstCMK**",  with the command aws kms create-alias. 
 Remember to replace 'your-key-id' with the value obtained from previous command (aws kms create-key).
 
+
+```
 $ aws kms create-alias --alias-name alias/FirstCMK --target-key-id 'your-key-id'
+```
 
 If you look now in the console, the CMK you just created displays now the right alias. 
 
