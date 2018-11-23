@@ -41,7 +41,8 @@ Navigate again to the IAM service and click on Roles, left area of the screen.
 <**Figure-1**>
 
 Search for the role that has been set up and attached to the instance by the CloudFormation template, its name is KMSWorkshop-InstanceInitRole. 
-![alt text](/res/S1F2%KMSinitRole.png)
+
+![alt text](/res/S1F2%20KMSinitRole.png)
 <**Figure-2**>
 
 Click on the role and then on "**Attach Policy**", we are going to provide permissions so the instance can create Keys. 
