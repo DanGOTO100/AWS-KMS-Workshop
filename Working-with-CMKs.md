@@ -45,15 +45,14 @@ Search for the role that has been set up and attached to the instance by the Clo
 ![alt text](/res/S1F2%20KMSinitRole.png)
 <**Figure-2**>
 
-Click on the role and then on "**Attach Policy**", we are going to provide permissions so the instance can create Keys. 
+Click on the role and then on "**Attach Policy**" button, we are going to provide permissions so the instance can create Keys. A new screen where you can now search for Policies will appear.
 ![alt text](/res/S1F3%20AttachPolicy.png)
 <**Figure-3**>
 
-Search "**AWSKeyManagementSystem**", and select the policy "**AWSKeyManagementSystemPowerUser".  That is the policy we are going to use for the instance role. **Please note**, the assigment of KMS Power User permissions is **just** for the initial walk-through in KMS, a typical user might not need the whole set of permissions. Later in the workshop we will work on how to implement more fine grained "Least Privilege" access, according to best practices,  in order to assign appropriate permissions to users and roles into KMS operations.
+Now, search "**AWSKeyManagementSystem**", and select the policy "**AWSKeyManagementSystemPowerUser**".  That is the policy we are going to use for the instance role. **Please note**, the assigment of KMS Power User permissions is **just** for the initial walk-through in KMS, a typical user might not need the whole set of permissions. Later in the workshop we will work on how to implement more fine grained "Least Privilege" access, according to best practices,  in order to assign appropriate permissions to users and roles into KMS operations.
 
 ![alt text](/res/S1F4%20KMSPowerUserPolicy.png)
 <**Figure-4**>
-
 
 
 
