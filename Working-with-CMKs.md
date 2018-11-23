@@ -27,5 +27,9 @@ An error occurred (AccessDeniedException) when calling the CreateKey operation: 
 ```
 
 This is because the initial role we have assigned to the instance does not include the capability to create keys. We need to add a policy to the role in order to enable us to perform certain actions with AWS KMS during the workshop. 
+
 Following **least privilege best practices**, we will be attaching policies with permissions as needed for the different AWS KMS operations we are working with. In this way it is easy track and detach the policies from the role, once they are not needed, and keep the least privilege principles.
+
+
+
 
