@@ -101,7 +101,7 @@ $ aws kms create-key
 {
     "KeyMetadata": {
         "Origin": "AWS_KMS", 
-        "KeyId": "**your-key-id**", 
+        "KeyId": "your-key-id", 
         "Description": "", 
         "KeyManager": "CUSTOMER", 
         "Enabled": true, 
@@ -114,7 +114,7 @@ $ aws kms create-key
 }
 
 ```
-The **KeyId** is very important as it is the unique identifier of the CMK within KMS. It is in the form of five blocks of digits. Take good note of the KeyID as you will be using it during the workshop.
+The **KeyId** is very important as it is the unique identifier of the CMK within KMS. It is in the form of five blocks of digits. Take good note of the KeyID as you will be using it during the workshop. During the Workshop,I will reference the vale as "**your-key-id**", please change it for your corresponding KeyId value when applicable.
 
 If you go to the console and navigate to the IAM service, in the left area to the bottom, "Encryption Keys", the key you have just created is already listed there. Remember to select the right Region. However, as we used the create-key command without parameters, it does not contain any alias to display and looks like its alias is empty. 
 
