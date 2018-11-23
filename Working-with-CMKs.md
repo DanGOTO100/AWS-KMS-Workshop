@@ -40,14 +40,17 @@ Navigate again to the IAM service and click on Roles, left area of the screen.
 ![alt text](/res/S1F1%20IAM.png)
 <**Figure-1**>
 
+
 Search for the role that has been set up and attached to the instance by the CloudFormation template, its name is KMSWorkshop-InstanceInitRole. 
 
 ![alt text](/res/S1F2%20KMSinitRole.png)
 <**Figure-2**>
 
+
 Click on the role and then on "**Attach Policies**" button, we are going to provide permissions so the instance can create Keys. A new screen where you can now search for Policies will appear.
 ![alt text](/res/S1F3%20AttachPolicy.png)
 <**Figure-3**>
+
 
 Now, search "**AWSKeyManagementSystem**", and select the policy "**AWSKeyManagementSystemPowerUser**".  That is the policy we are going to use for the instance role. **Please note**, the assigment of KMS Power User permissions is **just** for the initial walk-through in KMS, a typical user might not need the whole set of permissions. Later in the workshop we will work on how to implement more fine grained "Least Privilege" access, according to best practices,  in order to assign appropriate permissions to users and roles into KMS operations.
 
@@ -84,19 +87,21 @@ As this point we can review the policy, just by clicking on it. See the operatio
 }
 ```
 
-Select the policy and click the "Attach policy" button at botton right of the pase. The role attached to the instance is modified with his new policy and we should be able to create a Customer Master Key (CMK) now from the instance.
+
+Select the policy and click the "Attach policy" button at botton right of the page. The role attached to the instance is modified with his new policy and we should be able to create a Customer Master Key (CMK) now from the instance.Let's try it.
 
 
 
 ### Step 3 - Create the key  - again - and set an alias
 Run the aws kms create-key command again and this time you will get the result from the creation on a JSON block, like the one below:
+
 ```
 $ aws kms create-key
 
 {
     "KeyMetadata": {
         "Origin": "AWS_KMS", 
-        "KeyId": "your-key-id", 
+        "KeyId": "**your-key-id**", 
         "Description": "", 
         "KeyManager": "CUSTOMER", 
         "Enabled": true, 
@@ -109,6 +114,7 @@ $ aws kms create-key
 }
 
 ```
+The **KeyId** is very important as it is the unique identifier of the CMK within KMS. It is in the form of five blocks of digits. Take good note of the KeyID as you will be using it during the workshop.
 
 If you go to the console and navigate to the IAM service, in the left area to the bottom, "Encryption Keys", the key you have just created is already listed there. Remember to select the right Region. However, as we used the create-key command without parameters, it does not contain any alias to display and looks like its alias is empty. 
 
@@ -123,6 +129,10 @@ $ aws kms create-alias --alias-name alias/FirstCMK --target-key-id 'your-key-id'
 ```
 
 If you look now in the console, the CMK you just created displays now the right alias. 
+
+![alt text](/res/S1F5%20Alias.png)
+<**Figure-5**>
+
 
 When you create the CMK from the console, just by clicking the button "create key" there are other parameters you need to set like tags, key administrators and usage permissions. This steps will basically create a Key Policy and attach it to the key together with the tags you have set. 
 For the workshop, we will see how creating CMKs, policies and tags can be done from the CLI to have greater insights on their scope and implications. 
