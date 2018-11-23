@@ -1,5 +1,5 @@
 
-# PART 1: Operating with AWS KMS and CMKs
+# SECTION I: Operating with AWS KMS and CMKs
 
 
 ## Creating Customer Master Key (CMK)
@@ -38,7 +38,7 @@ We can add the needed permissions via the CLI or the console. We will use the co
 
 Navigate again to the IAM service and click on Roles, left area of the screen. Search for the role that has been set up and attached to the instance by the CloudFormation template, its name is KMSWorkshop-InstanceInitRole. 
 
-![alt text](https://github.com/DanGOTO100/Draft-Workshop/blob/master/res/S1F1%20IAM.png)
+![alt text](/res/S1F1%20IAM.png)
 Figure-1
 
 Click on the role and then on "Attach Policy", we are going to provide permissions so the instance can create Keys. 
