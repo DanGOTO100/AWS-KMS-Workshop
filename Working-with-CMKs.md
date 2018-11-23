@@ -116,7 +116,7 @@ $ aws kms create-key
 ```
 The **KeyId** is very important as it is the unique identifier of the CMK within KMS. It is in the form of five blocks of digits. Take good note of the KeyID as you will be using it during the workshop. During the Workshop,I will reference the vale as "**your-key-id**", please change it for your corresponding KeyId value when applicable.
 
-If you go to the console and navigate to the IAM service, in the left area to the bottom, "Encryption Keys", the key you have just created is already listed there. Remember to select the right Region. However, as we used the create-key command without parameters, it does not contain any alias to display and looks like its alias is empty. 
+If you go to the console and navigate to the IAM service, in the left area to the bottom, "Encryption Keys", the key you have just created is already listed there. **Important: Remember to select the right Region in the KMS screen**. However, as we used the create-key command without parameters, it does not contain any alias to display and looks like its alias is empty. 
 
 Key alias are very useful. They are easier to remenber when operating keys. Most importantly, when rotation keys, as we will see later in this section, we will not have to update our code to update it with the new KeyIDs or ARN. By using alias in our code to call the CMKs by its alias, and updating the alias CMKs to point to the newly generated key, the amount of change in our code gets minimized.
 
