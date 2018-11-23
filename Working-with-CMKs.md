@@ -36,15 +36,24 @@ Following **least privilege best practices**, we will be attaching policies with
 
 We can add the needed permissions via the CLI or the console. We will use the console for this operation.
 
-Navigate again to the IAM service and click on Roles, left area of the screen. Search for the role that has been set up and attached to the instance by the CloudFormation template, its name is KMSWorkshop-InstanceInitRole. 
-
+Navigate again to the IAM service and click on Roles, left area of the screen.
 ![alt text](/res/S1F1%20IAM.png)
 <**Figure-1**>
 
-Click on the role and then on "Attach Policy", we are going to provide permissions so the instance can create Keys. 
+Search for the role that has been set up and attached to the instance by the CloudFormation template, its name is KMSWorkshop-InstanceInitRole. 
+![alt text](/res/S1F2%KMSinitRole.png)
+<**Figure-2**>
+
+Click on the role and then on "**Attach Policy**", we are going to provide permissions so the instance can create Keys. 
+![alt text](/res/S2F3%20AttachPolicy.png)
+<**Figure-3**>
+
+Search "**AWSKeyManagementSystem**", and select the policy "**AWSKeyManagementSystemPowerUser".  That is the policy we are going to use for the instance role. **Please note**, the assigment of KMS Power User permissions is **just** for the initial walk-through in KMS, a typical user might not need the whole set of permissions. Later in the workshop we will work on how to implement more fine grained "Least Privilege" access, according to best practices,  in order to assign appropriate permissions to users and roles into KMS operations.
+
+![alt text](/res/S1F4%KMSPowerUserPolicy..png)
+<**Figure-4**>
 
 
-Search for "AWSKeyManagementSystemPowerUser", that is the policy we are going to use for the instance role. Please note, this is just for the initial walk-through in KMS. Later in the workshop we will work on how to implement "Least Privilege" best practices in order to assign appropriate permissions to users and roles into KMS operations.
 
 As this point we can review the policy, just by clicking on it. See the operations it is allowing the Poweruser into KMS.
 
