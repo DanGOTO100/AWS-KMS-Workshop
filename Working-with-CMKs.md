@@ -135,7 +135,7 @@ If you look now in the console, the CMK you just created displays now the right 
 
 
 When you create the CMK from the console, just by clicking the button "create key" there are other parameters you need to set like tags, key administrators and usage permissions. This steps will basically create a Key Policy and attach it to the key together with the tags you have set. 
-For the workshop, we will see how creating CMKs, policies and tags can be done from the CLI to have greater insights on their scope and implications. 
+For the workshop, we will see how creating CMKs, policies and tags can be done from the CLI to have greater insights on their scope and implications. Later, you will create CMKs from the console easily once all concepts are better understood.
 
 
 
