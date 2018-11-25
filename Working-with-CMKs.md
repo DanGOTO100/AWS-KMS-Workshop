@@ -308,12 +308,27 @@ If you go into the console, browser to the IAM service and select "**Encryption 
 
 -ADD
 
-You also have the option to display into the AWS CLI the ids and aliases of your keys with the command "**aws kms list-aliases**". The output will display the keys we have created and also the CMKs created by default for some of the services. 
+You also have the option to display into the AWS CLI the ids and aliases of your keys with the command "**aws kms list-aliases**". The JSON output will display the keys we have created and its alias, along with the aws service CMKs created by default for some of the services. 
 
 ```
 $ aws kms list-aliases
+
+{
+    "Aliases": [
+        {
+            "AliasArn": "arn:aws:kms:your-region:your-account:alias/FirstCMK", 
+            "AliasName": "alias/FirstCMK", 
+            "TargetKeyId": "your-key-id"
+        }, 
+        {
+            "AliasArn": "arn:aws:kms:your-region:your-account:alias/ImportedCMK", 
+            "AliasName": "alias/ImportedCMK", 
+            "TargetKeyId": "external-key-id"
+        }, 
+
 ```
 
 
+ ----
  
 
