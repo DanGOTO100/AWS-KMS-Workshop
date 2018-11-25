@@ -2,8 +2,8 @@
 # Operating with AWS KMS and CMKs
 
 In this first section we are going to learn the core operations of AWS KMS, that would allow us to go deeper into the service and its best practices. The section has four main areas:
- * [Creating Customer Master Keys](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#creating-customer-master-key-cmk)
- * [Generate CMKs with your own key material](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#generate-cmk-with-your-own-key-material)
+ * [Creating Customer Master Keys](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#creating-customer-master-keys-cmk)
+ * [Generate CMKs with your own key material](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#generate-cmks-with-your-own-key-material)
  * [Rotating Keys]
  * [Deleting Keys] 
 ----
