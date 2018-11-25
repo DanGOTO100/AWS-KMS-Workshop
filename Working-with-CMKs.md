@@ -5,9 +5,9 @@
 ## Creating Customer Master Key (CMK)
 
 Let 's connect to the instance and start working with the CMKs.
-CMKs are the primary resources in AWS KMS. You can use a CMK to encrypt and decrypt up to 4 kilobytes (4096 bytes) of data. However, most commonly, you will use CMKs to generate, encrypt, and decrypt the data keys that you use outside of AWS KMS to encrypt your data.
+CMKs are the primary resources in AWS KMS. You can use a CMK to encrypt and decrypt up to 4 kilobytes (4096 bytes) of data. However, most commonly, you will use CMKs to generate, encrypt, and decrypt the [data keys] (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys) that you use outside of AWS KMS to encrypt your data.
 
-There are different types of CMKs in KMS, see documentation here. Our first task in AWS KMS will be to create CMKs that will help us during the rest of the workshop.
+There are different types of CMKs in KMS, [see documentation here](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys) . Our first task in AWS KMS will be to create CMKs that will help us during the rest of the workshop.
 In this section we will create a CMK with key material coming from AWS KMS, and later we will generate a CMK with your own key material. It is important to remember that CMKs never leave AWS KMS unencrypted.
 
 ### Step 1 - create CMKs
@@ -255,9 +255,7 @@ when calling the ImportKeyMaterial operation: User: arn:aws:sts:::assumed-role/i
 As you can read in the error message, even though our instance has a "Power user" role, it is still missing some capabilities. We are following Least Privilege practices, therefore we are only providing the role the permissions it needs, in this case "**ImportKeyMaterial**" operation.
 
 We need to go back to the IAM service into the console and add this permission to the role we are working with "**KMSWorkshop-InstanceInitRole**".  
-Go back to the console, navigate to the IAM service. Look and click on the left column, the  "**Policies**" section. Then hit "**Create Policy**" button. 
-
-Select service "KMS".
+Go back to the console, navigate to the IAM service. Look and click on the left column, the  "**Policies**" section. Then hit "**Create Policy**" button. Search and select for the service "KMS" among all displayed on the screen. You will land i the policy creator/editor for KMS, as in image below: 
 
 
 ![Figure-6](/res/S1F6%20KMSPolicy.png)
@@ -265,7 +263,7 @@ Select service "KMS".
 <**Figure-6**>
 
 
-Scroll down a little bit, and in the actions section, select "**ImportKeyMaterial**" , like it is seen in the image below:
+Scroll down a little bit, and in the "**Actions**" section, go to "**Access Level**", within "**Write**" section,  and select "**ImportKeyMaterial**" , like it is seen in the image below:
 
 
 ![Figure-7](/res/S1F7%20KMSImport.png)
@@ -304,7 +302,7 @@ We might want to set an alias for this new key. We will use the alias "**Importe
 $ aws kms create-alias --alias-name alias/ImportedCMK --target-key-id 'external-key-id'
 ```
 
-If you go into the console again, browser the IAM service and select "Encryption Services". Make sure you have selected the right region. The new imported key with its alias is shown and it is ready to use.
+If you go into the console again, browser the IAM service and select "**Encryption Keys**" to open the KMS console. Make sure you have selected the right region. The new imported key with its alias is shown and it is ready to use.
 
 -ADD
 
