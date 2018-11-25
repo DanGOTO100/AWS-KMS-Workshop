@@ -38,27 +38,27 @@ We can add the needed permissions via the CLI or the console. We will use the co
 
 Logging into the console and navigate to the IAM service. Then click on "**Roles**", left area of the screen.
 ![alt text](/res/S1F1%20IAM.png)
-<Figure-1>
+<**Figure-1**>
 
 
 Search for the role that has been set up and attached to the instance by the CloudFormation template, its name is KMSWorkshop-InstanceInitRole. 
 
 ![alt text](/res/S1F2%20KMSinitRole.png)
 
-<Figure-2>
+<**Figure-2**>
 
 
 Click on the role and then on "**Attach Policies**" button, we are going to provide permissions so the instance can create Keys. A new screen where you can now search for Policies will appear.
 ![alt text](/res/S1F3%20AttachPolicy.png)
 
-<Figure-3>
+<**Figure-3**>
 
 
 Now, search "**AWSKeyManagementSystem**", and select the policy "**AWSKeyManagementSystemPowerUser**".  That is the policy we are going to use for the instance role. **Please note**, the assigment of KMS Power User permissions is **just** for the initial walk-through in KMS, a typical user might not need the whole set of permissions. Later in the workshop we will work on how to implement more fine grained "Least Privilege" access, according to best practices,  in order to assign appropriate permissions to users and roles into KMS operations.
 
 ![Figure-4](/res/S1F4%20KMSPowerUserPolicy.png)
 
-<Figure-4>
+<**Figure-4**>
 
 
 As this point we can review the policy, just by clicking on it. See the operations it is allowing the Poweruser into KMS.
@@ -147,8 +147,7 @@ For the workshop, we will see how creating CMKs, policies and tags can be done f
 With AWS KMS you can import your own key material to create a CMK. In order to do so, a special wrapping is needed to upload your key material to AWS KMS. See more details in [this part of the KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
 In this section we are going to generate a CMK importing our own key material.
 
-
-### Step 1 - create and empty key with origin set to external
+### Step 1 - Create and empty key with origin set to external
 
 
 The first step to do so is to issue the same create-key command but indicating the origin is external - this is, the key material will not come from AWS KMS, but from an external source
@@ -189,8 +188,8 @@ aws kms get-parameters-for-import --key-id external-key-id  --wrapping-algorithm
 In this command we are specifying a specific wrapping algorithm and the wrapping key spec. There are more options that you can check in the [KMS documentation](https://docs.aws.amazon.com/kms/latest/APIReference/API_GetParametersForImport.htm) 
   to suit other cryptographic needs.
 
-As a response, you will obtain a JSON file with the public key  base64 encoded, key id and import token  base64 encoded. Copy the public key into a new file and name it, for example **pkey.b64**.
-You can use vim or nano or any other Linux text editor of your choice to create the file and paste the public key value. Do the same for the import token, naming the file for example** token.b64**.
+As a response, you will obtain a JSON file with the public key  base64 encoded, key id and import token base64 encoded. Copy the public key into a new file and name it, for example **pkey.b64**.
+You can use vim or nano or any other Linux text editor of your choice to create the file and paste the public key value. Do the same for the import token, naming the file for example **token.b64**.
 You will finally have two files in your directory:
 
 ```
@@ -260,35 +259,38 @@ Go back to the console, navigate to the IAM service. Look and click on the left 
 
 Select service "KMS".
 
+
 ![Figure-6](/res/S1F6%20KMSPolicy.png)
 
-<Figure-6>
+<**Figure-6**>
 
 
 Scroll down a little bit, and in the actions section, select "**ImportKeyMaterial**" , like it is seen in the image below:
 
+
 ![Figure-7](/res/S1F7%20KMSImport.png)
 
-<Figure-7>
+<**Figure-7**>
 
 
 Finally, select resources "**Any**" and click "**Review Policy**".  Give it a name, like for example "**KMS-Workshop-ImportMaterialPermissions**" and hit "**Create Policy**".
 
 ![Figure-8](/res/S1F8%20KMSResources.png)
 
-<Figure-8>
+<**Figure-8**>
+ 
  
 With this, go back to the "Roles" section again (left side of the console within IAM service).
-Search again for KMSWorkshop-InstaceInitRole, as we did in the second step when creating a CMK with no import material.  
+Search again for **KMSWorkshop-InstaceInitRole**, as we did in the second step when creating a CMK with no import material.  
 
-Attach the new policy we have just created. Search for its name "**KMS-Workshop-ImportMaterialPermissions**" In the "Role" screen, then select "*Attach Policy**".
+Attach the new policy we have just created. Search for its name "**KMS-Workshop-ImportMaterialPermissions**" In the "Role" screen, then select "**Attach Policy**".
 
 
 ![Figure-9](/res/S1F9%20KMSARole.png)
-<Figure-9>
+<**Figure-9**>
  
 ![Figure-10](/res/S1F10%20KMSApolicy.png)
-<Figure-10>
+<**Figure-10**>
 
 
 Try now the command again, this time it will succeed. We have imported our key into KMS. 
@@ -303,6 +305,8 @@ $ aws kms create-alias --alias-name alias/ImportedCMK --target-key-id 'external-
 ```
 
 If you go into the console again, browser the IAM service and select "Encryption Services". Make sure you have selected the right region. The new imported key with its alias is shown and it is ready to use.
+
+-ADD
 
 You also have the option to display into the AWS CLI the ids and aliases of your keys with the command "**aws kms list-aliases**". The output will display the keys we have created and also the CMKs created by default for some of the services. 
 
