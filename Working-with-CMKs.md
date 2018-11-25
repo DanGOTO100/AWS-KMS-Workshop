@@ -1,9 +1,14 @@
 
 # Operating with AWS KMS and CMKs
 
+In this first section we are going to learn the core operations of AWS KMS, that would allow us to go deeper into the service and its best practices. The section has four main areas:
+ * [Creating Customer Master Keys](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#creating-customer-master-key-cmk)
+ * [Generate CMKs with your own key material](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#generate-cmk-with-your-own-key-material)
+ * [Rotating Keys]
+ * [Deleting Keys] 
 ----
 
-## Creating Customer Master Key (CMK)
+## Creating Customer Master Keys (CMK)
 
 Let 's connect to the instance and start working with the CMKs.
 CMKs are the primary resources in AWS KMS. You can use a CMK to encrypt and decrypt up to 4 kilobytes (4096 bytes) of data. However, most commonly, you will use CMKs to generate, encrypt, and decrypt the [data keys] (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys) that you use outside of AWS KMS to encrypt your data.
@@ -143,7 +148,7 @@ For the workshop, we will see how creating CMKs, policies and tags can be done f
 
 ----
 
-## Generate CMK with your own key material
+## Generate CMKs with your own key material
 
 With AWS KMS you can import your own key material to create a CMK. In order to do so, a special wrapping is needed to upload your key material to AWS KMS. See more details in [this part of the KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
 In this section we are going to generate a CMK importing our own key material.
