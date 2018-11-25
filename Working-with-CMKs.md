@@ -44,17 +44,20 @@ Logging into the console and navigate to the IAM service. Then click on "**Roles
 Search for the role that has been set up and attached to the instance by the CloudFormation template, its name is KMSWorkshop-InstanceInitRole. 
 
 ![alt text](/res/S1F2%20KMSinitRole.png)
+
 <Figure-2>
 
 
 Click on the role and then on "**Attach Policies**" button, we are going to provide permissions so the instance can create Keys. A new screen where you can now search for Policies will appear.
 ![alt text](/res/S1F3%20AttachPolicy.png)
+
 <Figure-3>
 
 
 Now, search "**AWSKeyManagementSystem**", and select the policy "**AWSKeyManagementSystemPowerUser**".  That is the policy we are going to use for the instance role. **Please note**, the assigment of KMS Power User permissions is **just** for the initial walk-through in KMS, a typical user might not need the whole set of permissions. Later in the workshop we will work on how to implement more fine grained "Least Privilege" access, according to best practices,  in order to assign appropriate permissions to users and roles into KMS operations.
 
-![alt text](/res/S1F4%20KMSPowerUserPolicy.png)
+![Figure-4](/res/S1F4%20KMSPowerUserPolicy.png)
+
 <Figure-4>
 
 
@@ -130,13 +133,178 @@ $ aws kms create-alias --alias-name alias/FirstCMK --target-key-id 'your-key-id'
 
 If you look now in the console, the CMK you just created displays now the right alias. 
 
-![alt text](/res/S1F5%20Alias.png)
+![Figure-5](/res/S1F5%20Alias.png)
 <**Figure-5**>
 
 
 When you create the CMK from the console, just by clicking the button "create key" there are other parameters you need to set like tags, key administrators and usage permissions. This steps will basically create a Key Policy and attach it to the key together with the tags you have set. 
 For the workshop, we will see how creating CMKs, policies and tags can be done from the CLI to have greater insights on their scope and implications. Later, you will create CMKs from the console easily once all concepts are better understood.
 
+
+
+
+## Generate CMK with your own key material
+
+With AWS KMS you can import your own key material to create a CMK. In order to do so, a special wrapping is needed to upload your key material to AWS KMS. See more details in this part of the KMS documentation.
+In this section we are going to generate a CMK importing our own key material.
+
+
+# Step 1 - create and empty key with origin = External
+
+The first step to do so is to issue the same create-key command but indicating the origin is external - this is, the key material will not come from AWS KMS, but from an external source
+
+$aws kms create-key --origin EXTERNAL
+
+´´´
+{
+    "KeyMetadata": {
+        "Origin": "EXTERNAL", 
+        "KeyId": "external-key-id", 
+        "Description": "", 
+        "KeyManager": "CUSTOMER", 
+        "Enabled": false, 
+        "KeyUsage": "ENCRYPT_DECRYPT", 
+        "KeyState": "PendingImport", 
+        "CreationDate": 1538511755.698, 
+        "Arn": "arn:aws:kms:eu-west-1::key/ca", 
+        "AWSAccountId": "your-account-id"
+    }
+´´´
+
+
+The key metadata response we have to the command is similar to the previous key generation. Note, however, the "Enabled" field shows "false" this time and the "KeyState" indicating "PendingImport" instead of Enabled. Basically we need to import our key material to have this CMK ready to use. 
+
+# Step 2 - Download public key and import token from AWS KMS
+
+Now, we need to download a public key and an import token from AWS KMS, so we can wrap our key material for the upload into AWS KMS with them. The public key and import token that we will download from AWS KMS will be different for each key we generate with origin as EXTERNAL.
+
+To download the public key and import token needed for the wrapping, we need to execute the following command, replacing "**external-key-id**" with the KeyId obtained in the previous step:
+
+´´´
+aws kms get-parameters-for-import --key-id external-key-id  --wrapping-algorithm RSAES_OAEP_SHA_1 --wrapping-key-spec RSA_2048
+´´´
+
+
+In this command we are specifying a specific wrapping algorithm and the wrapping key spec. There are more options that you can check in the [KMS documentation][https://docs.aws.amazon.com/kms/latest/APIReference/API_GetParametersForImport.html] 
+  to suit other cryptographic needs.
+
+As a response, you will obtain a JSON file with the public key  base64 encoded, key id and import token  base64 encoded. Copy the public key into a new file and name it, for example **pkey.b64**.
+You can use vim or nano or any other Linux text editor of your choice to create the file and paste the public key value. Do the same for the import token, naming the file for example** token.b64**.
+You will finally have two files in your directory:
+
+```
+$ ls -l
+total 8
+-rw-rw-r-- 1 ec2-user ec2-user  393 Oct  2 20:43 pkey.b64
+-rw-rw-r-- 1 ec2-user ec2-user 2345 Oct  2 20:43 token.b64
+```
+
+We are ready to decode the b64 format. We will use the [OpenSSL][https://openssl.org/librar+y, issuing the following command:
+
+```
+$ openssl enc -d -base64 -A -in pkey.b64 -out pkey.bin
+```
+
+
+We need to do the same for the import token:
+
+```
+$ openssl enc -d -base64 -A -in token.b64 -out token.bin
+```
+
+
+Both public key and import token are decoded from b64 format, and stored in binary format in its corresponding files. We have all we need to wrap our key material in order to upload it into AWS KMS. 
+
+# Step 3 - Create the import material and encrypt it for the import
+
+Now, where is our key material? Usually key material will come from an enterprise HSM or other key management system in the company that generates the key.
+For the workshop we will generate it with the OpenSSL library directly in our instance with the following command:
+
+```
+$ openssl rand -out genkey.bin 32
+```
+
+It will generate a 256 bit symmetric key and stores into file **genkey.bin**.
+
+The key that the file contains is our key material.
+We will wrap it now with the public and import token obatined from AWS KMS before:
+```
+openssl rsautl -encrypt -in genkey.bin -oaep -inkey pkey.bin -keyform DER -pubin -out WrappedKeyMaterial.bin
+```
+
+This command takes the generated key material and encrypt it with the public key we downloaded from AWS KMS. Then, saves the output in another file ** WrappedKeyMaterial.bin**.
+
+
+# Step 4 - Import your key material 
+
+The final step is to do the import itself. For that operation,  we will use the aws kms **import-key-material command** . We will need the import token we have in the **token.bin** file and the wrapped encrypted key material we have just storedin file  **WrappedKeyMaterial.bin**.
+
+Note in command below  the "fileb://" prefix. It is basically telling AWS CLI that the parameter data is binary data.  
+Also note the expiration date we have provided for the key material. On that date, AWS KMS will delete the key material and the CMK is not longer there for being used. You can always set the expiration model to "KEY_MATERIAL_DOES_NOT_EXPIRE" instead of "KEY_MATERIAL_EXPIRES", if you don't want the CMK to expire. We will go deeper into key rotation and deletion later in the workshop.
+As usual, replace "**your-key-id", with the real **KeyId** of the key generated in Step 1 above.
+
+```
+$ aws kms import-key-material --key-id your-key-id --encrypted-key-material fileb://WrappedKeyMaterial.bin --import-token fileb://token.bin --expiration-model KEY_MATERIAL_EXPIRES --valid-to 2019-02-01T12:00:00-08:00
+```
+
+All going well, the above command must have failed with the following error message:
+
+```
+when calling the ImportKeyMaterial operation: User: arn:aws:sts:::assumed-role/is not authorized to perform: kms:ImportKeyMaterial on resource: arn:aws:kms:eu-west-1:account-id:key/key-id
+```
+As you can read in the error message, even though our instance has a "Power user" role, it is still missing some capabilities. We are following Least Privilege practices, therefore we are only providing the role the permissions it needs, in this case "**ImportKeyMaterial**" operation.
+
+We need to go back to the IAM service into the console and add this permission to the role we are working with "**KMSWorkshop-InstanceInitRole**".  
+Go back to the console, navigate to the IAM service. Look and click on the left column, the  "**Policies**" section. Then hit "**Create Policy**" button. 
+
+Select service "KMS".
+
+![Figure-6](/res/S1F6%20KMSPolicy.png)
+<Figure-6>
+
+
+Scroll down a little bit, and in the actions section, select "**ImportKeyMaterial**" , like it is seen in the image below:
+
+![Figure-7](/res/S1F7%20KMSImport.png)
+<Figure-7>
+
+
+Finally, select resources "**Any**" and click "**Review Policy**".  Give it a name, like for example "**KMS-Workshop-ImportMaterialPermissions**" and hit "**Create Policy**".
+
+![Figure-8](/res/S1F8%20KMSResources.png)
+<Figure-8>
+ 
+With this, go back to the "Roles" section again (left side of the console within IAM service).
+Search again for KMSWorkshop-InstaceInitRole, as we did in the second step when creating a CMK with no import material.  
+
+Attach the new policy we have just created. Search for its name "**KMS-Workshop-ImportMaterialPermissions**" In the "Role" screen, then select "*Attach Policy**".
+
+
+![Figure-9](/res/S1F9%20KMSARole.png)
+<Figure-9>
+ 
+![Figure-10](/res/S1F10%20KMSApolicy.png)
+<Figure-10>
+
+
+Try now the command again, this time it will succeed. We have imported our key into KMS. 
+```
+$ aws kms import-key-material --key-id your-key-id --encrypted-key-material fileb://WrappedKeyMaterial.bin --import-token fileb://token.bin --expiration-model KEY_MATERIAL_EXPIRES --valid-to 2019-02-01T12:00:00-08:00
+```
+
+We might want to set an alias for this new key. We will use the alias "**ImportedCMK**". The command is the same as we used in previous section. Remember to replace "**external-key-id**" with the actual KeyId you obtain in Step-1 when creating a CMK with external origin:
+
+```
+$ aws kms create-alias --alias-name alias/ImportedCMK --target-key-id 'external-key-id'
+```
+
+If you go into the console again, browser the IAM service and select "Encryption Services". Make sure you have selected the right region. The new imported key with its alias is shown and it is ready to use.
+
+You also have the option to display into the AWS CLI the ids and aliases of your keys with the command "**aws kms list-aliases**". The output will display the keys we have created and also the CMKs created by default for some of the services. 
+
+```
+$ aws kms list-aliases
+```
 
 
  
