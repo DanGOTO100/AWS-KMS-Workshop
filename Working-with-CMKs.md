@@ -61,7 +61,6 @@ Now, search "**AWSKeyManagementSystem**", and select the policy "**AWSKeyManagem
 <Figure-4>
 
 
-
 As this point we can review the policy, just by clicking on it. See the operations it is allowing the Poweruser into KMS.
 
 ```
@@ -145,17 +144,18 @@ For the workshop, we will see how creating CMKs, policies and tags can be done f
 
 ## Generate CMK with your own key material
 
-With AWS KMS you can import your own key material to create a CMK. In order to do so, a special wrapping is needed to upload your key material to AWS KMS. See more details in this part of the KMS documentation.
+With AWS KMS you can import your own key material to create a CMK. In order to do so, a special wrapping is needed to upload your key material to AWS KMS. See more details in [this part of the KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
 In this section we are going to generate a CMK importing our own key material.
 
 
-# Step 1 - create and empty key with origin = External
+### Step 1 - create and empty key with origin set to external
+
 
 The first step to do so is to issue the same create-key command but indicating the origin is external - this is, the key material will not come from AWS KMS, but from an external source
 
 $aws kms create-key --origin EXTERNAL
 
-´´´
+```
 {
     "KeyMetadata": {
         "Origin": "EXTERNAL", 
@@ -168,24 +168,25 @@ $aws kms create-key --origin EXTERNAL
         "CreationDate": 1538511755.698, 
         "Arn": "arn:aws:kms:eu-west-1::key/ca", 
         "AWSAccountId": "your-account-id"
-    }
-´´´
+    }
+```
 
 
 The key metadata response we have to the command is similar to the previous key generation. Note, however, the "Enabled" field shows "false" this time and the "KeyState" indicating "PendingImport" instead of Enabled. Basically we need to import our key material to have this CMK ready to use. 
 
-# Step 2 - Download public key and import token from AWS KMS
+### Step 2 - Download public key and import token from AWS KMS
 
 Now, we need to download a public key and an import token from AWS KMS, so we can wrap our key material for the upload into AWS KMS with them. The public key and import token that we will download from AWS KMS will be different for each key we generate with origin as EXTERNAL.
 
 To download the public key and import token needed for the wrapping, we need to execute the following command, replacing "**external-key-id**" with the KeyId obtained in the previous step:
 
-´´´
+```
 aws kms get-parameters-for-import --key-id external-key-id  --wrapping-algorithm RSAES_OAEP_SHA_1 --wrapping-key-spec RSA_2048
-´´´
+```
 
 
-In this command we are specifying a specific wrapping algorithm and the wrapping key spec. There are more options that you can check in the [KMS documentation][https://docs.aws.amazon.com/kms/latest/APIReference/API_GetParametersForImport.html] 
+
+In this command we are specifying a specific wrapping algorithm and the wrapping key spec. There are more options that you can check in the [KMS documentation](https://docs.aws.amazon.com/kms/latest/APIReference/API_GetParametersForImport.htm) 
   to suit other cryptographic needs.
 
 As a response, you will obtain a JSON file with the public key  base64 encoded, key id and import token  base64 encoded. Copy the public key into a new file and name it, for example **pkey.b64**.
@@ -199,7 +200,7 @@ total 8
 -rw-rw-r-- 1 ec2-user ec2-user 2345 Oct  2 20:43 token.b64
 ```
 
-We are ready to decode the b64 format. We will use the [OpenSSL][https://openssl.org/librar+y, issuing the following command:
+We are ready to decode the b64 format. We will use the [OpenSSL](https://openssl.org/library), issuing the following command:
 
 ```
 $ openssl enc -d -base64 -A -in pkey.b64 -out pkey.bin
@@ -215,7 +216,7 @@ $ openssl enc -d -base64 -A -in token.b64 -out token.bin
 
 Both public key and import token are decoded from b64 format, and stored in binary format in its corresponding files. We have all we need to wrap our key material in order to upload it into AWS KMS. 
 
-# Step 3 - Create the import material and encrypt it for the import
+### Step 3 - Create the import material and encrypt it for the import
 
 Now, where is our key material? Usually key material will come from an enterprise HSM or other key management system in the company that generates the key.
 For the workshop we will generate it with the OpenSSL library directly in our instance with the following command:
@@ -235,7 +236,7 @@ openssl rsautl -encrypt -in genkey.bin -oaep -inkey pkey.bin -keyform DER -pubin
 This command takes the generated key material and encrypt it with the public key we downloaded from AWS KMS. Then, saves the output in another file ** WrappedKeyMaterial.bin**.
 
 
-# Step 4 - Import your key material 
+#### Step 4 - Import your key material 
 
 The final step is to do the import itself. For that operation,  we will use the aws kms **import-key-material command** . We will need the import token we have in the **token.bin** file and the wrapped encrypted key material we have just storedin file  **WrappedKeyMaterial.bin**.
 
@@ -260,18 +261,21 @@ Go back to the console, navigate to the IAM service. Look and click on the left 
 Select service "KMS".
 
 ![Figure-6](/res/S1F6%20KMSPolicy.png)
+
 <Figure-6>
 
 
 Scroll down a little bit, and in the actions section, select "**ImportKeyMaterial**" , like it is seen in the image below:
 
 ![Figure-7](/res/S1F7%20KMSImport.png)
+
 <Figure-7>
 
 
 Finally, select resources "**Any**" and click "**Review Policy**".  Give it a name, like for example "**KMS-Workshop-ImportMaterialPermissions**" and hit "**Create Policy**".
 
 ![Figure-8](/res/S1F8%20KMSResources.png)
+
 <Figure-8>
  
 With this, go back to the "Roles" section again (left side of the console within IAM service).
