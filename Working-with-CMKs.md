@@ -255,7 +255,7 @@ when calling the ImportKeyMaterial operation: User: arn:aws:sts:::assumed-role/i
 As you can read in the error message, even though our instance has a "Power user" role, it is still missing some capabilities. We are following Least Privilege practices, therefore we are only providing the role the permissions it needs, in this case "**ImportKeyMaterial**" operation.
 
 We need to go back to the IAM service into the console and add this permission to the role we are working with "**KMSWorkshop-InstanceInitRole**".  
-Go back to the console, navigate to the IAM service. Look and click on the left column, the  "**Policies**" section. Then hit "**Create Policy**" button. Search and select for the service "KMS" among all displayed on the screen. You will land i the policy creator/editor for KMS, as in image below: 
+Go back to the console, navigate to the IAM service. Look and click on the left column, the  "**Policies**" section. Then hit "**Create Policy**" button. Search and select for the service "KMS" among all displayed on the screen. You will land in  the policy creator/editor for KMS, as in image below: 
 
 
 ![Figure-6](/res/S1F6%20KMSPolicy.png)
@@ -271,12 +271,13 @@ Scroll down a little bit, and in the "**Actions**" section, go to "**Access Leve
 <**Figure-7**>
 
 
-Finally, select resources "**Any**" and click "**Review Policy**".  Give it a name, like for example "**KMS-Workshop-ImportMaterialPermissions**" and hit "**Create Policy**".
+Finally, select resources "**Any**" and click "**Review Policy**". 
 
 ![Figure-8](/res/S1F8%20KMSResources.png)
 
 <**Figure-8**>
- 
+
+In this step, give the policy a name, for example "**KMS-Workshop-ImportMaterialPermissions**" and hit "**Create Policy**".
  
 With this, go back to the "Roles" section again (left side of the console within IAM service).
 Search again for **KMSWorkshop-InstaceInitRole**, as we did in the second step when creating a CMK with no import material.  
@@ -291,18 +292,18 @@ Attach the new policy we have just created. Search for its name "**KMS-Workshop-
 <**Figure-10**>
 
 
-Try now the command again, this time it will succeed. We have imported our key into KMS. 
+Try now the command again, this time it will succeed. We have successfully imported our key into AWS KMS. 
 ```
 $ aws kms import-key-material --key-id your-key-id --encrypted-key-material fileb://WrappedKeyMaterial.bin --import-token fileb://token.bin --expiration-model KEY_MATERIAL_EXPIRES --valid-to 2019-02-01T12:00:00-08:00
 ```
 
-We might want to set an alias for this new key. We will use the alias "**ImportedCMK**". The command is the same as we used in previous section. Remember to replace "**external-key-id**" with the actual KeyId you obtain in Step-1 when creating a CMK with external origin:
+We might want to set an alias for this new key as well. We will use the alias "**ImportedCMK**". The command is the same as we used in previous section. Remember to replace "**external-key-id**" with the actual KeyId you obtain in Step-1 when creating a CMK with external origin:
 
 ```
 $ aws kms create-alias --alias-name alias/ImportedCMK --target-key-id 'external-key-id'
 ```
 
-If you go into the console again, browser the IAM service and select "**Encryption Keys**" to open the KMS console. Make sure you have selected the right region. The new imported key with its alias is shown and it is ready to use.
+If you go into the console, browser to the IAM service and select "**Encryption Keys**" to open the KMS console. Make sure you have selected the right region. The new imported key with its alias is shown and it is ready to use.
 
 -ADD
 
