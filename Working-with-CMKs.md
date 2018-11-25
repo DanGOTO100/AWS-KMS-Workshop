@@ -1,6 +1,7 @@
 
 # Operating with AWS KMS and CMKs
 
+----
 
 ## Creating Customer Master Key (CMK)
 
@@ -140,7 +141,7 @@ When you create the CMK from the console, just by clicking the button "create ke
 For the workshop, we will see how creating CMKs, policies and tags can be done from the CLI to have greater insights on their scope and implications. Later, you will create CMKs from the console easily once all concepts are better understood.
 
 
-
+----
 
 ## Generate CMK with your own key material
 
@@ -171,7 +172,7 @@ $aws kms create-key --origin EXTERNAL
 ```
 
 
-The key metadata response we have to the command is similar to the previous key generation. Note, however, the "Enabled" field shows "false" this time and the "KeyState" indicating "PendingImport" instead of Enabled. Basically we need to import our key material to have this CMK ready to use. 
+The key metadata response we have to the command is similar to the previous key generation. Note, however, the "Enabled" field shows "false" this time and the "KeyState" is indicating "PendingImport" instead of Enabled. Basically we need to import our key material to have this CMK ready to use. The KeyId format is again a block of five sequences of numbers. Remenber to replace **<external-key-id>** by the actual value you obtained in previos command when it corresponds.
 
 ### Step 2 - Download public key and import token from AWS KMS
 
