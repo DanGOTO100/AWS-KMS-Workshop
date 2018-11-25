@@ -41,7 +41,7 @@ Logging into the console and navigate to the IAM service. Then click on "**Roles
 <**Figure-1**>
 
 
-Search for the role that has been set up and attached to the instance by the CloudFormation template, its name is KMSWorkshop-InstanceInitRole. 
+Search for the role that has been set up and attached to the instance by the CloudFormation template, its name is **KMSWorkshop-InstanceInitRole**. 
 
 ![alt text](/res/S1F2%20KMSinitRole.png)
 
