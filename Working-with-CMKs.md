@@ -325,7 +325,8 @@ $ aws kms list-aliases
             "AliasName": "alias/ImportedCMK", 
             "TargetKeyId": "external-key-id"
         }, 
-
+        ...}
+        
 ```
 
 
