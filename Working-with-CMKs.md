@@ -4,8 +4,8 @@
 In this first section we are going to learn the core operations of AWS KMS, that would allow us to go deeper into the service and its best practices. The section has four main areas:
  * [Creating Customer Master Keys](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#creating-customer-master-keys-cmk)
  * [Generate CMKs with your own key material](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#generate-cmks-with-your-own-key-material)
- * [Rotating Keys]
- * [Deleting Keys] 
+ * [Rotating AWS KMS CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#rotating-AWS-KMS-CMKs)
+ * [Deleting AWS KMS CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#deleting-AWS-KMS-CMKs)
 ----
 
 ## Creating Customer Master Keys (CMK)
@@ -339,7 +339,7 @@ $ aws kms list-aliases
  
  
 
-## Rotating Keys
+## Rotating AWS KMS CMKs
 
 Key rotation is a very important in key management and a security best practice.
 In AWS KMS there are different ways to rotate keys according to the way they were created.
@@ -385,7 +385,7 @@ The old key remains in AWS KMS (until you delete it). When you use the CMK to de
 
 With the CMKs generated with your own key material, automatic rotation is not possible. You have to manually create a new key, with your own material, and again: Either update the alias of the CMK (recommendable) or change your code to point to the new key. It seems much easier just to change alias pointer. 
 
-In order to do so, we first need to create a new key with imported key material, as we did with to cfreate the CMK "ImportedCMK". Follow the procedure in the section above "Generate CMK with your own key material".
+In order to do so, we first need to create a new key with imported key material, as we did with to cfreate the CMK "ImportedCMK". Follow the procedure in the section above "[Generate CMK with your own key material](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#generate-cmks-with-your-own-key-material)".
 
 Once you have created a new CMK with you new imported key material, update the alias "**ImportedCMK**" to point to the new key you have provided. Replace **KeyID** in command below with the KeyID of your newly created CMK.
 
@@ -398,7 +398,7 @@ For CMKs created by AWS and using AWS key material:  AWS Managed CMKs, the rotat
 ---
 
 
-### Deleting Keys
+### Deleting AWS KMS CMKs
 
 Deleting customer master keys is a very sensitive operation.  You should delete a CMK only when you are sure that you don't need to use it anymore. The implications of key deletion are explained in the following [section](https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html) of the AWS KMS documentation, please read carefully.
 Providing the right permissions for key deletion are an important part of best practices working with AWS KMS, as we see in next section.
