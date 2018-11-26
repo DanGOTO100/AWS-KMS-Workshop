@@ -14,27 +14,28 @@ The WebApp is very simple python web server that works as a shared file server, 
 Let's make a working directory for a our sample WebApp and install the boto3 AWS Pyhon library library: Check we are in our home first.
 
 ```
-pwd
+$ pwd
 /home/ec2-user
 ```
 
 Make the new directory and install the needed boto3 python library (if not present already).
 
 ```
-sudo mkdir SampleWebApp
-sudo pip install boto3
+$ sudo mkdir SampleWebApp
+$ sudo pip install boto3
 ```
 
 Now, get into the directory and download the sample WebApp from the following link.
 
 ```
 $ sudo cd /SampleWebApp
-$  sudo wget  xxxxxxxxxxx
+$ sudo wget  xxxxxxxxxxx
 ```
 
-You have downloaded a python application, name "SampleWebApp.py", that will be our test WebApp.
+You have downloaded a python application, named "**SampleWebApp.py**", that will be our test Web App.
 
 We can run the server now with the following command:
+
 ```
 sudo python WebApp.py 80
 ```
@@ -48,6 +49,7 @@ sudo curl http://169.254.169.254/latest/meta-data/public-ipv4/
 ```
 
 You can go to a browser now and navigate to the WebApp in the URL you obtained in the previous step:  http://54.X.X.44
+**Note:** if you run into issues with reaching the server, it may be worthy to recheck the security group associated with the server, use [this link to the Security Groups documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html). 
 
 The WebApp has the file uploader, a browser of present objects in our S3 bucket and the local files.
 In your laptop create a text file with a sample text, and provide it a name like "**SampleFile-KMS.txt**"
