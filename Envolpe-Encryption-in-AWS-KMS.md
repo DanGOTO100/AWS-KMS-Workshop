@@ -1,8 +1,18 @@
 # Envolpe Encryption in AWS KMS
 
+Envolpe Encryption is an integral part of the AWS KMS operation and interactions with other AWS services. In this section we are going to get a better understanding of what it is, make some practice over it and check how it applies for Server Side Encrytion, Client Side Encryption and even how AWS KMS can operate directly providing encrytion with no envelope encryption.
+
+The section is divided in the following parts:
+
+* [How envelope encryption works in practice]()
+* [Server Side Encrytion]()
+* [Client Side Encrytion]()
+* [Diret Encrytion with AWS KMS]()
+
+
 ## How envelope encryption works in practice
 
-AWS KMS is able t to encrypt and decrypt up to 4 kilobytes (4096 bytes) of data. With other volumes of data, normally you will use a data key to perform encryption operations outside KMS through envelope encryption.
+AWS KMS is able to encrypt and decrypt up to 4 kilobytes (4096 bytes) of data. With other volumes of data, normally you will use a data key to perform encryption operations outside KMS through envelope encryption.
 Envelope encryption refers to the practice of protecting the data by encrypting it with a data key, and encrypting the data key itself with a another encryption key, a CMK under KMS in this case.
 See the following figure from [AWS KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#enveloping).
 
@@ -152,13 +162,11 @@ We need now  to decode it from base64 and use it to decrypt the encrypted secret
 ```
 $ echo '97**********FEFE*ROL****************OOL' | base64 --decode > datakeyPlainText.txt
 
-
 $  openssl enc -d -aes256 -in encryptedSecret.txt -k fileb://datakeyPlainText.txt
-
-
 Sample Secret Text to Encrypt
 ```
+
 Good job, We have the secret text decrypted and ready to use by our applications. 
 
-By completing this part of the workshop you now have a better understanding on what envelope ecnryption is, let's now see how it applies for AWS services working with AWS KMS.
+By completing this part of the workshop you now have a better understanding of what envelope ecnryption is, let's now see how it applies for AWS services working with AWS KMS.
 
