@@ -337,4 +337,100 @@ $ aws kms list-aliases
 
  ----
  
+ 
+
+## Rotating Keys
+
+Key rotation is a very important in key management and a security best practice.
+In AWS KMS there are different ways to rotate keys according to the way they were created.
+
+### Step 1 - CMKs generated with AWS key material 
+
+For CMKs created with AWS key material, you can opt-in to automatically rotate the key every year
+AWS KMS generates new cryptographic material for the CMK every year. In this case,  AWS KMS also saves the CMK's older cryptographic material so it can be used to decrypt data that it encrypted.
+
+Automatic key rotation preserves the properties of the CMK: key ID, key ARN, region, policies, and permissions, do not change when the key is rotated, so you don´t have to manually update the alias of the CMK to point to a newly generated CMK.
+
+Let's opt-in to automatically rotate the CMK key we created before with AWS key material, remenber its alias was "**FirstCMK**", the KeyID was "**your-key-id**". 
+
+```
+$ enable-key-rotation --key-id your-key-id
+
+```
+
+
+If the command executed successfully, you have enabled the automatic rotation of the CMK, that will happen in 365 days since the command executed, 1 year.
+
+Another way to rotate the CMKs built with AWS key material is to generate a new key.
+Then you might need to replace the information on our applications to point to this new key. However it is more efficient to update the CMK alias to point to the new key just created. Let's do it:
+
+
+Firt of all create a new key with AWS key material. We already used this command before, in fact, it was the first command in the workshop.
+
+```
+$ aws kms create-key
+```
+
+You will obtain a response with a new KeyID and a new Key ARN. We can update the alias we set i for the first key we generated, "**FirstCMK**", to point to this new key, so it replaces the old one. For that, you will use the KeyID or key ARN of the new key you have just created.
+
+```
+$ aws kms update-alias --alias FirstCMK --target-key-id KeyID
+```
+
+All the applications that were using "FirstCMK" key alias, are now using the new key. In this way, we did not have to manually change the "KeyId" or key ARN one by one in all occurrences of our code were the CMK is invoked. 
+The old key remains in AWS KMS (until you delete it). When you use the CMK to decrypt, AWS KMS uses the backing key that was used to encrypt, this is, for example, if you needed to decrypt some encrypted data previous to the alias change. It will happen automatically.  More information about Key Rotation in [this section](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) of AWS KMS documentation.
+
+### Step 2 - Rotating CMKs generated with your own key material 
+
+
+With the CMKs generated with your own key material, automatic rotation is not possible. You have to manually create a new key, with your own material, and again: Either update the alias of the CMK (recommendable) or change your code to point to the new key. It seems much easier just to change alias pointer. 
+
+In order to do so, we first need to create a new key with imported key material, as we did with to cfreate the CMK "ImportedCMK". Follow the procedure in the section above "Generate CMK with your own key material".
+
+Once you have created a new CMK with you new imported key material, update the alias "**ImportedCMK**" to point to the new key you have provided. Replace **KeyID** in command below with the KeyID of your newly created CMK.
+
+```
+$ aws kms update-alias --alias ImportedCMK. --target-key-id KeyID
+```
+
+For CMKs created by AWS and using AWS key material:  AWS Managed CMKs, the rotation is automatically happening every three years. See [this link](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) of AWS KMS documentation.to the documentation for more info on key rotation.
+
+---
+
+
+### Deleting Keys
+
+Deleting customer master keys is a very sensitive operation.  You should delete a CMK only when you are sure that you don't need to use it anymore. The implications of key deletion are explained in the following [section](https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html) of the AWS KMS documentation, please read carefully.
+Providing the right permissions for key deletion are an important part of best practices working with AWS KMS, as we see in next section.
+If you are not sure that you need to delete you might want to disable the key. Execute the following command to change the state of our first key "**FirstCMK**" to disabled. You will have to replace "**your-key-id**" with your corresponding KeyId or ARN.
+
+```
+$ aws kms disable-key --key-id your-key-id
+```
+
+
+
+In the output JSON you can see that the status is set to ""Enabled": false".
+We may need to re-enable it in the future. In order to do so, execute the following command (again, replace "**your-key-id**" with your corresponding KeyID or ARN) :
+
+$ aws kms enable-key --key-id your-key-id
+
+For the deletion operation, AWS KMS enforces a waiting period. To delete a CMK in AWS KMS you have to schedule a key deletion. You can set the waiting period from a minimum of 7 days up to a maximum of 30 days. The default waiting period is 30 days. Let's schedule key deletion in seven days, use the following command. Please, replace "**your-key-id**" with your corresponding KeyID or ARN for "**FirstCMK** key.
+
+$ aws kms schedule-key-deletion --key-id your-key-id --pending-window-in-days 7
+
+
+Working with CMKs that have been generated with your own key material is a bit different because you can schedule a key deletion but you can also delete key material on demand. Therefore, for deletion of key material, you can schedule a date and wait for the key material to expire or you delete it manually.
+
+If you may want to delete it **immediately**, you could issue a command like the one below to delete the key material you have imported, rendering the key unusable. You should replace "your-key-id" with your corresponding KeyID or ARN. 
+**The command below is for information purposes, don´t execute it as part of the lesson**. 
+If for any reason you delete the key we generated with our own key material "**ImportedCMK**", later you wwould have to import again your key material into the CMK and into the same alias to get it back to an usable state
+
+## just for information
+```
+$ delete-imported-key-material --key-id  your-key-id.   
+```
+
+You have now completed this section of the workshop.
+
 
