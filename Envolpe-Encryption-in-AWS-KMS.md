@@ -50,7 +50,7 @@ Next, we ask AWS KMS to generate a data key referencing a CMK. The CMK is refere
 ```
 $ aws kms generate-data-key --key-id alias/ImportedCMK --key-spec AES_256 --encryption-context project=workshop
 ```
-You will notice that it will fail. Our Power user role does not have enough privileges to generate a data key. 
+You will notice that the command will fail to run. Our current Role with Power User permissions rdoes not have enough privileges to generate a data key. As per least privilege best practices, we are providing permissions as needed in policies attached to the role that can be easily tracked and dettached when such permission for that user is not needed any more.
 
 We need to provide with permission to generate a data key. The process is the same as we used in the previos section of the workshop, please go back to it if you need to in the following link: "[Create a policy to the Role](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#step-2---create-policy-and-attach-it-to-the-role)"
 Basically, you need to go back to the AWS console, in the services area navigate to IAM and go to "**Policies**". We are going to create a new policy and attach it to the Power user role.
@@ -66,7 +66,7 @@ $ aws kms generate-data-key --key-id alias/ImportedCMK --key-spec AES_256 --encr
 
 {
     "Plaintext": "97**********FEFE*ROL****************OOL", 
-    "KeyId": "arn:aws:kms:eu-west-1:487311937335:key/-KeyId-used-to-encrypt", 
+    "KeyId": "arn:aws:kms:eu-west-1:-your-account.id:key/-KeyId-used-to-encrypt", 
     "CiphertextBlob": "*********************+**********M05/D********************************************D12bL*****2A**"
 }
 ```
