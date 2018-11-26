@@ -9,6 +9,7 @@ The section is divided in the following parts:
 * [Client Side Encrytion]()
 * [Diret Encrytion with AWS KMS]()
 
+---
 
 ## How envelope encryption works in practice
 
@@ -170,3 +171,4 @@ Good job, We have the secret text decrypted and ready to use by our applications
 
 By completing this part of the workshop you now have a better understanding of what envelope ecnryption is, let's now see how it applies for AWS services working with AWS KMS.
 
+--
