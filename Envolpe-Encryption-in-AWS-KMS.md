@@ -4,14 +4,14 @@ Encryption is an integral part of the AWS KMS operations and its interactions wi
 
 The section is divided in the following parts:
 
-* [How envelope encryption works in practice]()
-* [Server Side Encrytion]()
-* [Client Side Encrytion]()
-* [Diret Encrytion with AWS KMS]()
+* [How Envelope Encryption works in practice]()
+* [Server Side Encryption]()
+* [Client Side Encryption]()
+* [Diret Encryption with AWS KMS]()
 
 ---
 
-## How envelope encryption works in practice
+## How Envelope Encryption works in practice
 
 AWS KMS is able to encrypt and decrypt up to 4 kilobytes (4096 bytes) of data. With other volumes of data, normally you will use a data key to perform encryption operations outside KMS through envelope encryption.
 Envelope encryption refers to the practice of protecting the data by encrypting it with a data key, and encrypting the data key itself with a another encryption key, a CMK under KMS in this case.
