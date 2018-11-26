@@ -4,10 +4,10 @@ Encryption is an integral part of the AWS KMS operations and its interactions wi
 
 The section is divided in the following parts:
 
-* [How Envelope Encryption works in practice]()
-* [Server Side Encryption]()
-* [Client Side Encryption]()
-* [Diret Encryption with AWS KMS]()
+* [How Envelope Encryption works in practice](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Envolpe-Encryption-in-AWS-KMS.md#how-envelope-encryption-works-in-practice)
+* [Server Side Encryption](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Envolpe-Encryption-in-AWS-KMS.md#envelope-encryption-server-side-encryption)
+* [Client Side Encryption](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Envolpe-Encryption-in-AWS-KMS.md#envelope-encryption-client-side-encryption)
+* [Direct Encryption with AWS KMS](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Envolpe-Encryption-in-AWS-KMS.md#encryption-using-aws-kms-with-no-data-key)
 
 ---
 
