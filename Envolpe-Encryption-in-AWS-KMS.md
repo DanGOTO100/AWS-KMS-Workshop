@@ -256,7 +256,7 @@ We are going to encrypt it with a CMK and use an encryption context that will ne
 ```
 $ aws kms encrypt --key-id alias/ImportedCMK --plaintext fileb://NewSecretFile.txt --encryption-context project=kmsworkshop --output text  --query CiphertextBlob | base64 --decode > NewSecretsEncryptedFile.txt
 ```
-Note we have called the CMK used to encrypt by its alias. The input file needs the "fileb" prefix to be processed in binary, while the output is decoded from b64 the new output file "NewSecretsEncryptedFile.txt"
+Note we have called the CMK used to encrypt by its alias. The input file needs the "fileb" prefix to be processed in binary, while the output is decoded from b64 the new output file "**NewSecretsEncryptedFile.txt**"
 
 Take a look at the Encrypted file:
 
@@ -279,7 +279,7 @@ Wait, what is the problem?. At this point of the workshop, we should know that w
 $ aws kms decrypt --ciphertext-blob fileb://NewSecretsEncryptedFile.txt --encryption-context project=kmsworkshop --output text --query Plaintext | base64 --decode > NewSecretsDecryptedFile.txt
 ````
 
-If you now take a look at the file we have created with the previous command "NewSecretsDecryptedFile.txt". The secret text is now back unencrypted and ready for us.
+If you now take a look at the file we have created with the previous command "**NewSecretsDecryptedFile.txt**". The secret text is now back unencrypted and ready for us.
 
 You have completed the second section of the workshop. In the next section we will work with a real-life Web App and will try to implement best practices.
 
