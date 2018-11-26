@@ -26,7 +26,7 @@ except ImportError:
 
 
 s3 = boto3.resource('s3')
-my_bucket = s3.Bucket('kms-workshop')
+my_bucket = s3.Bucket('kms-workshop-accountID')
 
 
 
@@ -121,7 +121,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 # we got the file in the server, Uploading it now to S3            
                 data = open(fn, 'rb')
                 filena = fn.split("/")[-1]
-                uplo = s3.Bucket('kms-workshop').put_object(Key=filena, Body=data)
+                uplo = s3.Bucket('kms-workshop-accountID').put_object(Key=filena, Body=data)
                 if uplo:
                     print("Upload to S3 OK")
                 else:
@@ -215,7 +215,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         f.write('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
         f.write("<html>\n<title>KMS Workshop - Sample WebApp S3 Uploader</title>\n")   
         f.write("<style> .center { display: block; margin-left: auto; margin-right: auto;}</style>") 
-        f.write("<body>\n<img src=\"https://d1.awsstatic.com/amazonkinesis/KMS_LP_2%20Centralized%20Key%20Management.7a771ed004c56ca85621c2987a9196e33b208f4b.png\" alt=\"KMSicon\" class=\"center\">\n<h2><center>KMS Workshop - Sample WebApp S3 Uploader</center></h2>\n")
+        f.write("<body>\n<img src=\"https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/res/IconWebApp.png?raw=true\" alt=\"KMSicon\" class=\"center\">\n<h2><center>KMS Workshop - Sample WebApp S3 Uploader</center></h2>\n")
         f.write("<hr>\n")
         f.write("<h2>File Upload here:</h2>\n")
         f.write("<form ENCTYPE=\"multipart/form-data\" method=\"post\">")
