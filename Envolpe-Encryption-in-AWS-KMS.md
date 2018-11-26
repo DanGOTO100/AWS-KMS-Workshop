@@ -1,4 +1,4 @@
-# Envolpe Encryption in AWS KMS
+# Encryption with AWS KMS
 
 Envolpe Encryption is an integral part of the AWS KMS operation and interactions with other AWS services. In this section we are going to get a better understanding of what it is, make some practice over it and check how it applies for Server Side Encrytion, Client Side Encryption and even how AWS KMS can operate directly providing encrytion with no envelope encryption.
 
