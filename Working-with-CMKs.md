@@ -309,9 +309,11 @@ We might want to set an alias for this new key as well. We will use the alias "*
 $ aws kms create-alias --alias-name alias/ImportedCMK --target-key-id 'external-key-id'
 ```
 
-If you go into the console, browser to the IAM service and select "**Encryption Keys**" to open the KMS console. Make sure you have selected the right region. The new imported key with its alias is shown and it is ready to use.
+If you go into the console, browser to the IAM service and select "**Encryption Keys**" to open the KMS console. Make sure you have selected the right region (picture below- upper red bounding box). The new imported key with its alias is shown and it is ready to use.
 
--ADD
+![Figure-11](/res/S1F11.png)
+
+<**Figure-11**>
 
 You also have the option to display into the AWS CLI the ids and aliases of your keys with the command "**aws kms list-aliases**". The JSON output will display the keys we have created and its alias, along with the aws service CMKs created by default for some of the services. 
 
