@@ -171,4 +171,117 @@ Good job, We have the secret text decrypted and ready to use by our applications
 
 By completing this part of the workshop you now have a better understanding of what envelope ecnryption is, let's now see how it applies for AWS services working with AWS KMS.
 
---
+----
+
+
+### Envelope encryption. Server side encryption
+
+In AWS there are main two main procedures to protect your data at rest: Client side encryption and Server side Encryption. 
+
+For example in Amazon S3, You can encrypt your data before uploading it into the Amazon S3 Service (client side encryption) or encrypt once the data is there (server side encryption). More details in this [link to the S3 documentation](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html). A similar approach can be taken in other services like Amazon DynamoDB, see [details here](https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/client-server-side.html).
+
+The envelop encryption mechanism described here is also the mechanism behind the server side Encryption that takes place in the AWS services integrated with KMS. There are very good descriptions on how AWS KMS is being used by different services in this part of the [AWS KMS documentation here](https://docs.aws.amazon.com/kms/latest/developerguide/service-integration.html).
+
+For the workshop, let's see an example of attaching a disk to our working instance and how we can encrypt it with AWS KMS and the key we have created with our key material, its alias is "**ImportedCMK**".
+
+We start by going into the AWS console. Navigate to Amazon EC2 service. Look in the left pane. Locate "Elastic Block Store" and click on volumes.
+
+
+![alt text](/res/S2F2.png)
+
+<**Figure-2**>
+
+Now in the upper area, you can click on "Create Volume" to create a new Amazon EBS disk. Once in the volume creation screen, and for the workshorp you can leave the defaults in most fields- Except for the following: Ensure you have selected the Availability zone finishing in "1a". The disk can only be attached to instances in the same availability zone.
+Ensure you have marked  "**Encryption**" checkbox. Then select the CMK you want to use from AWS KMS. Let's select the CMK that we have imported with our own key material, the alias was: **ImportedCMK**.
+
+![alt text](/res/S2F3.png)
+
+<**Figure-3**>
+
+Create a tag for the volume, for example a key-pair like: **Name-WorkshopEB**S.
+Click on "**Create volume**" at the right bottom of the screen. The volume will start being created and will be ready to be attached to the instance in a few seconds. 
+
+We have now a encrypted volume that can be attached to our instance. In order to do so, navigating to EC2 service in the console again,  just go to the "**Volumes**" in the left pane. Check Under "**Elastic Block Store**" on the left are of the screen and select the volume you have created. Cick on the "**Actions**" button and select "**Attach**". In the new window, select the instance we want it to be attached to, this is our workshop working instance: **KMSWorkshopInstance**.
+
+
+If you go back to the terminal connection to your instance, you can see the encrypted 100GiB disk is available for being mounted and used.
+
+```
+$ lsblk
+
+NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+xvda    202:0    0    8G  0 disk 
+└─xvda1 202:1    0    8G  0 part /
+xvdf    202:80   0  100G  0 disk 
+```
+
+Behind the scenes, an **envelope encryption process** through AWS KMS has taken place. 
+
+Furthermore, encryption context was used during the process to enforce the security and better traceability.
+Amazon EBS request AWS KMS to generate a data key under a CMK. The encrypted data key is stored within the volume metadata and Amazon EC2 ask AWS KMS to decrypt the data key. Then, the content is encrypted with the data key. 
+
+The encryption context is used with the volume-id of the Amazon EBS volume in all the encryption and decryption operations. 
+See more details in the following [link to the Amazon EBS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/services-ebs.html).
+
+
+
+
+
+### Envelope encryption. Client side encryption
+
+
+In the first topic of this section of the workshop (How Envelope Encryption works in practice) we  have just seen an example of how AWS KMS can encrypt in client side by generating a data key, using an envelope encryption mechanism, to encrypt a secret text file with two tiers of protection.
+
+While you can code all the primitives and commands to implement encryption on the client side, AWS has a SDK, the [AWS Encryption SDK](https://docs.aws.amazon.com/es_es/encryption-sdk/latest/developer-guide/introduction.html). This SDK uses envelope encryption and it is integrated with AWS KMS. It will implement most of the operations we have seen before as simple API calls. AWS KMS can become a Master Key provider for the AWS Encryption SDK, however you may use other Master Key provider with the SDK. 
+
+I recommend to take a look at the AWS Encryption SDK. Also, some AWS services have specific encryption SDKs, like the on in Amazon DynamoDB: the "DynamoDB Encryption Client", you can take a look [in this link](https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/what-is-ddb-encrypt.html). 
+
+
+
+### Encryption using AWS KMS with no Data Key
+
+You can also use the a CMK in AWS KMS to encrypt and decrypt a secret directly, without the generation of a Data Key and hence, without the envelope encryption process. Remember, AWS KMS is able to encrypt and decrypt up to 4 kilobytes (4096 bytes) of data. We can use the CLI or APIs.
+
+ In this example, we will use the CLI to encrypt a secret and decrypt using the CMK itself. Note that the encryption operation takes place in AWS KMS. When a data key is generated via the CMK, the encryption and decryption process happens outside AWS KMS.
+
+Let's Create a new secret file.
+
+```
+$ echo "New secret text" > NewSecretFile.txt
+```
+
+We are going to encrypt it with a CMK and use an encryption context that will need to be provided in the decrypt operation.
+
+```
+$ aws kms encrypt --key-id alias/ImportedCMK --plaintext fileb://NewSecretFile.txt --encryption-context project=kmsworkshop --output text  --query CiphertextBlob | base64 --decode > NewSecretsEncryptedFile.txt
+```
+Note we have called the CMK used to encrypt by its alias. The input file needs the "fileb" prefix to be processed in binary, while the output is decoded from b64 the new output file "NewSecretsEncryptedFile.txt"
+
+Take a look at the Encrypted file:
+
+```
+$ cat NewSecretsEncryptedFile.txt
+_0]0!!$$?`?He.0?k<n㷇?@PP99Rn0l *?H???@?i$?@ ??+?7??U??b?)?U??;?o?B?P?
+```
+
+Great, It unreadable as is encrypted. Can´t read the original text. Now let's decrypt it.
+
+```
+$ aws kms decrypt --ciphertext-blob fileb://NewSecretsEncryptedFile.txt --output text --query Plaintext | base64 --decode > NewSecretsDecryptedFile.txt
+
+An error occurred (InvalidCiphertextException) when calling the Decrypt operation:
+```
+
+Wait, what is the problem?. At this point of the workshop, we should know that without the encryption context, the operation will not succeed. That was the problem. Let's try it again including the encryption context we stated during the encryption process:
+
+```
+$ aws kms decrypt --ciphertext-blob fileb://NewSecretsEncryptedFile.txt --encryption-context project=kmsworkshop --output text --query Plaintext | base64 --decode > NewSecretsDecryptedFile.txt
+````
+
+If you now take a look at the file we have created with the previous command "NewSecretsDecryptedFile.txt". The secret text is now back unencrypted and ready for us.
+
+You have completed the second section of the workshop. In the next section we will work with a real-life Web App and will try to implement best practices.
+
+
+
+
