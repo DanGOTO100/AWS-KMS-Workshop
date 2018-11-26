@@ -1,6 +1,6 @@
 # Encryption with AWS KMS
 
-Encryption is the integral part of the AWS KMS operation and interactions with other AWS services. In this section we are going to get a better understanding and make some practices. AWS KMS mostly uses envelope encryption, but can also encrypt data without it. Envelope encryption is the main encryption vehicle for AWS services using AWS KMS. 
+Encryption is an integral part of the AWS KMS operations and its interactions with other AWS services. In this section we are going to get a better understanding and make some practices. AWS KMS mostly uses envelope encryption, but can also encrypt data without it. Envelope encryption is the main encryption vehicle for AWS services using AWS KMS. 
 
 The section is divided in the following parts:
 
