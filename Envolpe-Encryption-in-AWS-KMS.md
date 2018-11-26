@@ -1,6 +1,6 @@
 # Encryption with AWS KMS
 
-Encryption is an integral part of the AWS KMS operations and its interactions with other AWS services. In this section we are going to get a better understanding and make some practices. AWS KMS mostly uses envelope encryption, but can also encrypt data without it. Envelope encryption is the main encryption vehicle for AWS services using AWS KMS. 
+Encryption is an integral part of the AWS KMS operations and its interactions with other AWS services. In this section we are going to get a better understanding of it and make some hands-on practices. AWS KMS mostly uses envelope encryption, but can also encrypt data without it. Envelope encryption is the main encryption vehicle for AWS services using AWS KMS. 
 
 The section is divided in the following parts:
 
@@ -225,7 +225,7 @@ See more details in the following [link to the Amazon EBS documentation](https:/
 
 
 
-
+----
 
 ### Envelope encryption. Client side encryption
 
@@ -236,6 +236,7 @@ While you can code all the primitives and commands to implement encryption on th
 
 I recommend to take a look at the AWS Encryption SDK. Also, some AWS services have specific encryption SDKs, like the on in Amazon DynamoDB: the "DynamoDB Encryption Client", you can take a look [in this link](https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/what-is-ddb-encrypt.html). 
 
+----
 
 
 ### Encryption using AWS KMS with no Data Key
