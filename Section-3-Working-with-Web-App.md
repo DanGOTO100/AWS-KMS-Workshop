@@ -70,7 +70,7 @@ Now, go back  and check that it is showing  and then click on it, to download it
 If you refresh the page in your browser, you will notice the same file appears now as a local file with prefix "localfile". The Web App is designed to create also a further local cache.
 
 
-
+---
 
 ### Part 2 - Adding Encryption to the Web App
 
@@ -142,7 +142,7 @@ From the file browser Web App, you can download and display the file we have upl
 
 Amazon S3 Server Side Encryption works with envelope encryption in a similar way as what we described in the previous section for Amazon EBS. For more details check [this S3 documentation link](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html).
 
-
+---
 
 ### Part 3 - Working with Key Policies
 
@@ -374,6 +374,218 @@ MFA is enforced through a condition as seen below:
 ```
 
 In this key policy, we don´t allow certain very sensitive operations to take place, unless the user or the role has gone through a MFA authentication process in the last 5 minutes (300 seconds). Make sure you understand the policy. After the examples seen by now, you should be able to understsand how it works. We will not enforce as in the workshop we are working with roles and not with users. However the overall concept is the same.
+
+---
+
+
+### Part 4 - Creating an AWS KMS Private Endpoint
+
+Resources can communicate with AWS KMS through a VPC private endpoint.
+A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection. 
+
+When you use a VPC endpoint, **communication between your VPC and AWS KMS is conducted entirely within the AWS network**.
+You can specify the VPC endpoint in [AWS KMS API operations](https://docs.aws.amazon.com/kms/latest/APIReference/) and [AWS CLI commands](https://docs.aws.amazon.com/kms/latest/APIReference/).
+
+We will create a VPC endpoint and use it to interact with AWS KMS.
+We are going to need a few data about the network our instance is running on. We could use the console to get that data or we could use the AWS CLI to obtain metada from the instance. Let's use the latter and collect the data we need
+
+First let's refresh the region we are running on:
+
+```
+ $ curl http://169.254.169.254/latest/meta-data/placement/availability-zone
+xx-xxxx-1a
+```
+
+Now the rest of the data:
+
+```
+ $ curl http://169.254.169.254/latest/meta-data/network/interfaces/macs/
+
+0a:xx:xx:xx:xx:7e
+```
+
+Take note of the Mac Address we have just obtained and perform a second curl operation:
+
+```
+$ curl http://169.254.169.254/latest/meta-data/network/interfaces/macs/0a:xx:xx:xx:dd:7e/vpc-id
+
+vpc-1xxxxxx1
+```
+
+You will obtain the id of the VPC your instance is currently running on. Take good note of this value too.
+
+Now run these two commands,using the appropriate Mac addresses obtained in the previous step and keep the output values:
+
+```
+$ curl http://169.254.169.254/latest/meta-data/network/interface:0a:xx:xx:7e/subnet-id
+subnet-0axxxx50
+
+$ curl http://169.254.169.254/latest/meta-data/network/interfaces/mac:0a:xx:xx:7e/security-group-ids 
+sg-05xxxxxxxxe97
+```
+
+We have just obtained the subnet id where the instance is running on and the security group associated to the instance.
+When creating the VPC endpoint, we associate it with one or several subnets different AZs. For the workshop, we will associate it with the subnet where the instance is running on.
+In the same way, the VPC endpoint must have a security group. Let's associate the same as the instance has right now.
+
+Let's create the endpoint with the follwing command. PLease, use the appropriate values we have obtained for the VPC, Security Group and Subnets for the parameters.:
+
+```
+$aws ec2 create-vpc-endpoint  --vpc-id vpc-1xxxx1  --vpc-endpoint-type Interface  --service-name com.amazonaws.eu-west-1.kms  --subnet-ids subnet-0xxx50 --security-group-id sg-05xxxxxxxxe97
+```
+
+If the command executed correctly, you will have a JSON response like this:
+
+{
+    "VpcEndpoint": {
+        "VpcId": "vpc-1xxxxxx1", 
+        "NetworkInterfaceIds": [
+            "eni-0xxxxxxxxx3"
+        ], 
+        "SubnetIds": [
+            "subnet-0xxxx0"
+        ], 
+        "PrivateDnsEnabled": true, 
+        "State": "pending", 
+        "ServiceName": "com.amazonaws.eu-west-1.kms", 
+        "RouteTableIds": [], 
+        "Groups": [
+            {
+                "GroupName": "sxxxxg", 
+                "GroupId": "sg-05exxxxxxxxf"
+            }
+        ], 
+        "VpcEndpointId": "vpce-0xxxxxxxxxxa", 
+        "VpcEndpointType": "Interface", 
+        "CreationTimestamp": "2018-xxxxxx-Z", 
+        
+ "DnsEntries": [
+            {
+                "HostedZoneId": "xxxxxxx", 
+                "DnsName": "kms.eu-west-1.amazonaws.com"
+            }, 
+            {
+                "HostedZoneId": "xxxxxxx", 
+                "DnsName": "vpce-xxxxxxxxa-xxxxxx.kms.eu-west-1.vpce.amazonaws.com"
+            }, 
+            {
+                "HostedZoneId": "ZxxxxxxxxxT", 
+                "DnsName": "vpce-xxxxxxxxa-xxxxxx.kms.eu-west-1.vpce.amazonaws.com"
+            }
+        ]
+    }
+}
+
+
+
+
+Congratualtions, as you can see, the "**VpcEndpointId**" is ready to be used. We are going to need the VPC endpoint Id and the DnsName of the endpoint to make the API calls within it. Take note of "**VpcEndpointId**" and the "**DnsName**" from previous JSON response.
+Please note that the VPC endpoint can also easily be created from the console, you can follow the steps in this [link to the documentation](https://docs.aws.amazon.com/kms/latest/developerguide/kms-vpc-endpoint.html).
+
+Now, let's perform an operation in AWS KMS using the endpoint. As an example, we will list the keys we currently have:
+
+```
+$ aws kms list-keys --endpoint-url https://vpce-xxxxxxxxa-xxxxxx.kms.eu-west-1.vpce.amazonaws.com
+```
+
+Congrats again, the commmand will succeed and our request and response has not gone outside the AWS network. There are many other operations you can use with the endpoint.
+
+---
+
+### Part 5 - VPC Endpoints and Key Policies
+
+
+VPC endpoints allows us to establish more restrictive conditions to the operations we allow on AWS KMS and its CMKs.
+
+For example, let's change the key policy of our CMK with imported key material, alias "**ImportedCMK**", to allow only certain operations from the VPC endpoint.
+
+As explained in the section "**PWorking with Key Policies**", navigate to the console and change the key policy of the "**ImportedCMK**" CMK key with the one below. Replace the account id and the VPC Endpoint Id with the ones you have obtained.
+
+```
+{
+  "Version": "2012-10-17",
+  "Id": "key-default-1",
+  "Statement": [
+    {
+      "Sid": "Enable IAM User Permissions",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::your-account-id:root"
+      },
+      "Action": "kms:*",
+      "Resource": "*"
+    },
+    {
+      "Sid": "Allow for Use only within our VPC",
+      "Effect": "Deny",
+      "Principal": {
+        "AWS": "arn:aws:iam::your-account-id:role/KMSWorkshop-InstaceInitRole"
+      },
+      "Action": [
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "aws:sourceVpce": "vpce-1xxxxxxxx1"
+        }
+      }
+    }
+  ]
+}
+```
+
+When a VPC Endpoint is setup in the VPC,  The standard AWS KMS DNS hostname (https://kms.<region>.amazonaws.com) resolves to your VPC endpoint. This is only If you enabled private hostnames when you created your VPC endpoint. If so, you do not need to specify the VPC endpoint URL in your CLI commands or application configuration
+
+However, If you disable DNS Hostnames for you VPC with the simple procedure outlined in this [VPC documentation link](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-dns.html#vpc-dns-hostnames), section "**Updating DNS Support for Your VPC**" and try to operate with AWS KMS **outside** the VPC Endpoint, it will fail to execute **due to the policy we have just enforced** that requires certain operations with AWS KMS to be performed through a VPC Endpoint.
+
+Disable DNS Hostnames options and try to execute one of the commands in the policy (use the id of CMK alias "ImportedCMK"):
+
+```
+$ aws kms generate-data-key --key-id xxxxxxxxxxxxx
+
+An error occurred (AccessDeniedException) when calling the GenerateDataKey operation: User: arn:aws:sts::48xxxxx5:assumed-role/KMSWorkshop-InstaceInitRole/i-081xxxxxx30 is not authorized to perform: kms:GenerateDataKey on resource: arn:aws:kms:eu-west-1:your-account-id:key/xxxxxxxxxxxxxxxx with an explicit deny
+```
+
+Let's use the try the same operation but forcing the request to go through the VPC Endpoint (replace the vpce endpoint with the one you created):
+
+```
+
+
+$ aws kms generate-data-key --key-id xxxxxxxxxxxxx --endpoint-url https://vpce-xxxxxxxxxxxxxx-xxxxxxxxx.kms.eu-west-1.vpce.amazonaws.com
+```
+
+In this case the operation will succeed. We have added and extra layer of protection to our key, making AWS KMS only available internally within AWS for certain sensitive operations.
+
+
+---
+
+
+
+### Part 6 - Key Tagging
+
+Tagging is an important strategy for managning CMKs in AWS KMS.
+You can add, change, and delete tags for customer managed CMKs. Each tag consists of a tag key and a tag valuethat you define.
+You can add tags to a CMK when you first create them. Then, add, edit, and delete tags at any time. 
+
+To add a tag to the CMK we have been working with, you can use the console or the CLI. Let's tag our CMK "**ImportedCMK**", with a project it may belong to, just an a example.
+
+```
+$ aws kms tag-resource --key-id your-key-id --tags TagKey=project,TagValue=kmsworkshop
+```
+
+The other usual operations with tags are also available: list tags for resource and untag the resource.
+Let's list the resource tags:
+
+```
+$ aws kms list-resource-tags --key-id your-key-id
+```
+
+Add a few more tags to the CMK and try to remove the tags (untag) with commad "untag-resource".
+For information on the command, please use [this section of the AWS KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html).
 
 
 
