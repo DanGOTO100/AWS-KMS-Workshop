@@ -4,10 +4,14 @@ In this section, using a Web App, we are going to implement best practices for A
 These best practices are based on the Whitepaper "**[AWS Key Management Service Best Practices](https://d0.awsstatic.com/whitepapers/aws-kms-best-practices.pdf)**"
 
 this section has the following parts:
-
+* [Installing the Web App]()
+* [Adding Encryption to the Web App]()
+* [Working with Key Policiess]()
+* [Key Policies and VPC Private Endpoint]()
+* [AWS KMS key tagging]()
 ---
 
-### Part 1 - Installing the WebApp
+### Part 1 - Installing the Web App
 
 The WebApp is very simple python web server that works as a shared file server, for internal employees for example. It allows to upload and download files to/from  S3. For downloads the WebApp keeps a local file in the instance where WebApp is running, prefixing the file with "localfile-". Remenber, our instance has a role with a policy attached to it that allow to read/write from S3.
 
@@ -25,11 +29,11 @@ $ sudo mkdir SampleWebApp
 $ sudo pip install boto3
 ```
 
-Now, get into the directory and download the sample WebApp from the following link:
+Now, get into the directory and download the sample WebApp with wget as stated below:
 
 ```
 $ sudo cd /SampleWebApp
-$ sudo wget  xxxxxxxxxxx
+$ sudo wget  https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/WebApp.py
 ```
 
 You have downloaded a python application, named "**SampleWebApp.py**", that will be our test Web App.
@@ -96,9 +100,9 @@ We could very easily modify the code in our App to include the Server Side Encry
 Howeverit is more clear if we download a version of the WebApp with the changes already implemented, and hence that provides Server Side Encryption using one of our CMKs.
 
 Stop the server from running with CTRL+C (maybe twice)
-Download the version of the Web App that **adds encryption** and run the server again:
+Download the version of the Web App that **adds Server Side Encryption** and run the server again:
 
-$  sudo wget XXXXXXXXXXXXXXXXXX
+$  sudo wget https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/WebAppEncSSE.py
 
 We are going to need the KeyId of the CMK we pretend to use for the encryption of the files. The CMK we pretend to use is the one generated with our import material and which alias was "**ImportedCMK**".
 
@@ -323,7 +327,7 @@ With this policy we will ensure that only instances that have the appropriate ro
 
 Furthermore,  you can also include conditions over key policies to help you fine tune access and link to several other parameters. 
 As an example, conditions can work with **encryption context** to be able to restrict the operations for this KMS. Amazon S3 when calling AWS KMS to generate a Data Key and perform the envelope encryption process, it passes and encryption context to AWS KMS, see below a log from a "**GenerateDataKey**" event:
-..
+```
 "eventName": "GenerateDataKey",
 …
 "requestParameters": {
@@ -331,7 +335,7 @@ As an example, conditions can work with **encryption context** to be able to res
         "encryptionContext": {
             "aws:s3:arn": "arn:aws:s3:::kms-workshop/SampleFile-KMS.txt"
         },
-…
+```
 
 We could use that to add a condition in KMS with the condition kms:EncryptionContextKey. 
 There is a full example in the [documentation here](https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-context-keys). Make sure you click the link and check that you undertand how the key policy is enforced using encryption context as condition.
@@ -435,6 +439,7 @@ $aws ec2 create-vpc-endpoint  --vpc-id vpc-1xxxx1  --vpc-endpoint-type Interface
 ```
 
 If the command executed correctly, you will have a JSON response like this:
+```
 
 {
     "VpcEndpoint": {
@@ -476,7 +481,7 @@ If the command executed correctly, you will have a JSON response like this:
     }
 }
 
-
+```
 
 
 Congratualtions, as you can see, the "**VpcEndpointId**" is ready to be used. We are going to need the VPC endpoint Id and the DnsName of the endpoint to make the API calls within it. Take note of "**VpcEndpointId**" and the "**DnsName**" from previous JSON response.
