@@ -33,7 +33,7 @@ Now, get into the directory and download the sample WebApp with wget as stated b
 
 ```
 $ sudo cd /SampleWebApp
-$ sudo wget  https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/WebApp.py
+$ sudo wget  https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop/master/WebApp.py
 ```
 
 You have downloaded a python application, named "**SampleWebApp.py**", that will be our test Web App.
@@ -102,7 +102,7 @@ Howeverit is more clear if we download a version of the WebApp with the changes 
 Stop the server from running with CTRL+C (maybe twice)
 Download the version of the Web App that **adds Server Side Encryption** and run the server again:
 
-$  sudo wget https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/WebAppEncSSE.py
+$  sudo wget https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop/master/WebAppEncSSE.py
 
 We are going to need the KeyId of the CMK we pretend to use for the encryption of the files. The CMK we pretend to use is the one generated with our import material and which alias was "**ImportedCMK**".
 
