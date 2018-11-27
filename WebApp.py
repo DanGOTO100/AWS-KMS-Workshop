@@ -26,7 +26,7 @@ except ImportError:
 
 
 s3 = boto3.resource('s3')
-my_bucket = s3.Bucket('kms-workshop-accountID')
+my_bucket = s3.Bucket('kms-workshop-'+GlobalAcc)
 
 
 
@@ -317,4 +317,5 @@ def test(HandlerClass = SimpleHTTPRequestHandler,
 
 
 if __name__ == '__main__':
+    GlobalAcc = raw_input('Enter your Account ID: ')
     test()
