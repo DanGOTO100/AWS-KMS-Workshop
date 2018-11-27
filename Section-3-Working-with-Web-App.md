@@ -4,11 +4,11 @@ In this section, using a Web App, we are going to implement best practices for A
 These best practices are based on the Whitepaper "**[AWS Key Management Service Best Practices](https://d0.awsstatic.com/whitepapers/aws-kms-best-practices.pdf)**"
 
 this section has the following parts:
-* [Installing the Web App]()
-* [Adding Encryption to the Web App]()
-* [Working with Key Policiess]()
-* [Key Policies and VPC Private Endpoint]()
-* [AWS KMS key tagging]()
+* [Installing the Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-1---installing-the-web-app)
+* [Adding Encryption to the Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-2---adding-encryption-to-the-web-app)
+* [Working with Key Policiess](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-3---working-with-key-policies)
+* [Key Policies and VPC Private Endpoint](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-4---creating-an-aws-kms-private-endpoint)
+* [AWS KMS key tagging](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-5---vpc-endpoints-and-key-policies)
 ---
 
 ### Part 1 - Installing the Web App
@@ -55,15 +55,17 @@ sudo curl http://169.254.169.254/latest/meta-data/public-ipv4/
 You can go to a browser now and navigate to the WebApp in the URL you obtained in the previous step:  http://54.X.X.44
 **Note:** if you run into issues with reaching the server, it may be worthy to recheck the security group associated with the server, use [this link to the Security Groups documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html). 
 
+![alt text](/res/S3F1.png)
+<**Figure-1**>
+
 The WebApp has the file uploader, a browser of present objects in our S3 bucket and the local files.
 In your laptop create a text file with a sample text, and provide it a name like "**SampleFile-KMS.txt**"
 Upload it through the WebApp.
 
-![alt text](/res/S3F1.png)
-<**Figure-1**>
 
 
-You should get to a success page. 
+
+You should get to a page informing that the operation was successul. 
 
 ![alt text](/res/S3F2.png)
 <**Figure-2**>
