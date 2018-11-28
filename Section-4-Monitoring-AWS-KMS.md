@@ -96,10 +96,10 @@ Inside metrics, find the ones that belong to AWS KMS:
 ![alt text](/res/S4F4.png)
 <**Figure-4**>
 
-If you click through it you will find the metric "SecondsUntilKeyMaterialExpiration" for your CMK built with imported  key material. 
+If you click through it you will find the metric "**SecondsUntilKeyMaterialExpiration**" for your CMK built with imported  key material. 
 With this metric you can now build an alarm into CloudWatch to warn you about the expiration of the key material for example. 
 
-Now, as a final assignment, let's create an Amazon Cloudwatch alarm over an AWS KMS metric. follow the Amazon Cloudwatch instructions in [this Amazon CloudWatch section](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ConsoleAlarms.html) to c
+Now, as a final assignment, let's create an Amazon Cloudwatch alarm over an AWS KMS metric. follow the Amazon Cloudwatch instructions in [this Amazon CloudWatch section](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ConsoleAlarms.html).
 In this case we only have a metric coming from AWS KMS so it should be easy for you to identify it and creating the alarm for it. 
 You can use the SNS topic that we create before: "**snsworkshop**". 
 
