@@ -45,29 +45,29 @@ What we are going to do is to create a notification system with [Amazon CloudWat
 We will do through the AWS console. 
 First let's create a notification topic and subscribe to it, to receive notifications when an event we defined is triggered.
 
-In the console, navigate to Simple Notification Service (SNS) service. Click on "Create Topic" and provide a topic name and a display name. Any name may work, try with "**snsworkshop**" for the name and choose any display name must not exceed 10 characters. 
-Take note of the "**Topic ARN*" listed there. Something like: arn:aws:sns:eu-west-1:yout-account-id:snsworkshop
+In the console, navigate to Simple Notification Service (SNS) service. Click on "**Create Topic**" and provide a topic name and a display name. Any name may work, try with "**snsworkshop**" for the name and choose any display name must not exceed 10 characters. 
+Take note of the "**Topic ARN**" listed there. Something like: "*arn:aws:sns:eu-west-1:yout-account-id:snsworkshop*"
 
 Now on the right pane, select "**Subscriptions**" and click on "**Create subscriptions**".
 Provide the topic ARN that you took note in the previous step and in "Protocol" select "Email" and provide your mail.
 You will receive an email to confirm your subscription.  
 
 With this, navigate to AWS CloudWatch service in the console, and in the right pane, select "**Events**".
-Leave "**Event Pattern**" Clicked and select "**Events by Service**" in "**Build event pattern to match...*".
+Leave "**Event Pattern**" Clicked and select "**Events by Service**" in "**Build event pattern to match...**".
 
 ![alt text](/res/S4F2.png)
 <**Figure-2**>
 
 
-Select "Service Name" as "CloudTrail" and "Event Type"  as "AWS API Call via CloudTrail".
-Then select "Specific operation(s) and in the blank space, type the event name: "GenerateDataKey".
+Select "**Service Name**" as "**CloudTrail**" and "**Event Type**"  as "**AWS API Call via CloudTrail**".
+Then select "Specific operation(s) and in the blank space, type the event name: "**GenerateDataKey**".
 
 ![alt text](/res/S4F3.png)
 <**Figure-3**>
 
 
 Now press the "**+**" symbol to aggregate it to then event source filter. We have the input part ready, now let's do the target part. 
-On the right side of the screen, find "**+ Add Target^^" and click it.
+On the right side of the screen, find "**+ Add Target**" and click it.
 On the first row, it would say "**Lambda Function**", change it to "**SNS Topic**", Then select the topic created before "**snsworkshop**". 
 You are ready to hit the "**Configure details**" button on the botton of the page.
 Now just provide a name to the rule and hit "**Create Rule**".
@@ -79,7 +79,7 @@ Let's test it by calling the GenerateDataKey operation again.
 $ aws kms generate-data-key --key-id alias/ImportedCMK --key-spec AES_256 --encryption-context project=workshop
 ```
 If everything went well you should now receive an email notifying you of the operation that took place. 
-**Note: ** Don´t forget to hae confirmed your subcripution to SNS topic (you should have recevied an email).
+**Note:** Don´t forget to hae confirmed your subcripution to SNS topic (you should have recevied an email).
 We have established a notification for a specific operation. F
 or a list of the log entries that AWS KMS generates in AWS CloudTrail, please check the following [section of the AWS KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html).
 
