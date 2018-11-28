@@ -7,6 +7,8 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
 * A IAM Role for the EC2 instance with persmission to start with the workshop
 * Security groups associated with the instace, to allow it to be accesible via SSH 
 
+(**NOTE:** The security groups initally allow connections from internet to the SSH port, you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance)
+
 
 In this first section we are going to learn the core operations of AWS KMS, that would allow us to go deeper into the service and its best practices. The section has four main areas:
  * [Creating Customer Master Keys (CMK)](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#creating-customer-master-keys-cmk)
