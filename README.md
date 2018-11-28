@@ -1,4 +1,3 @@
-![alt image](/res/
 
 # AWS KMS Workshop
 
