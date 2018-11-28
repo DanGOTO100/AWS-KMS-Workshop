@@ -1,6 +1,13 @@
 
 # Operating with AWS KMS and CMKs
 
+This is the first section of the AWS KMS Workshop, please ensure you have read and understood the [prerequisites for the workshop](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop#pre---requisites), especially you need to launch the following Cloudformation stack that will build the needed resources to work with:
+
+* An EC2 instance to work with the AWS CLI
+* A IAM Role for the EC2 instance with persmission to start with the workshop
+* Security groups associated with the instace, to allow it to be accesible via SSH 
+
+
 In this first section we are going to learn the core operations of AWS KMS, that would allow us to go deeper into the service and its best practices. The section has four main areas:
  * [Creating Customer Master Keys (CMK)](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#creating-customer-master-keys-cmk)
  * [Generate CMKs with your own key material](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#generate-cmks-with-your-own-key-material)
