@@ -29,6 +29,6 @@ In order to set up the working environment for the workshop, you need the follow
 * A set of key pairs in order to access the instances that will be launched from CloudFormation. If you don´t have it, create them as per the instrucions in the AWS EC2 documentation: [creating a  key pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#having-ec2-create-your-key-pair).
 * Capability to connect to the EC2 instances via terminal. For options, check the following [link to the EC2 documentation](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html)
 
-**Once you are ready**, click on the following **CloudFormation template** to launch the needed resources and go to the first section of the workshop:[Section I - Operating with AWS KMS and the CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Operating-with-AWS-KMS.md).
+**Once you are ready**, click on the following **CloudFormation template** to launch the needed resources and go to the first section of the workshop: [Section I - Operating with AWS KMS and the CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Operating-with-AWS-KMS.md).
 
 
