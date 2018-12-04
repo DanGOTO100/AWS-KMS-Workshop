@@ -29,7 +29,6 @@ Make sure the instance has internet access. If you need help with these steps, m
 
 
 5. Assing the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. We will ensure that the AWS CLI on the instance has enough permissions to run AWS KMS operations.
-
 If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/).
 
 
