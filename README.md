@@ -1,7 +1,6 @@
 
 
-# AWS KMS Workshop
-![alt text](/res/AWS-KMS-icon.png)
+![alt text](/res/AWS-KMS.jpg)
 
 AWS Key Management Service (KMS) makes it easy for you to create and manage keys and control the use of encryption across a wide range of AWS services and in your applications. AWS KMS is a secure and resilient service that uses FIPS 140-2 validated hardware security modules to protect your keys.
 
