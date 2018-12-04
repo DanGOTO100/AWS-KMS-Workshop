@@ -54,10 +54,10 @@ If you can connect to your instance then **You should now be ready to start with
 # Operating with AWS KMS and CMKs
 
 In this first section we are going to learn the core operations of AWS KMS, that would allow us to go deeper into the service and its best practices. The section has four main areas:
- * [Creating Customer Master Keys (CMK)](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#creating-customer-master-keys-cmk)
- * [Generate CMKs with your own key material](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#generate-cmks-with-your-own-key-material)
- * [Rotating AWS KMS CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#rotating-AWS-KMS-CMKs)
- * [Deleting AWS KMS CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#deleting-AWS-KMS-CMKs)
+ * [Creating Customer Master Keys (CMK)](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Working-with-CMKs.md#creating-customer-master-keys-cmk)
+ * [Generate CMKs with your own key material](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Working-with-CMKs.md#generate-cmks-with-your-own-key-material)
+ * [Rotating AWS KMS CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Working-with-CMKs.md#rotating-AWS-KMS-CMKs)
+ * [Deleting AWS KMS CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Working-with-CMKs.md#deleting-AWS-KMS-CMKs)
 ----
 
 
