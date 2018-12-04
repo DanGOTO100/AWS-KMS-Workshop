@@ -28,7 +28,9 @@ Make sure the instance has internet access. If you need help with these steps, m
    If you need help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
 
-5. Assing the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/).
+5. Assing the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. We will ensure that the AWS CLI on the instance has enough permissions to run AWS KMS operations.
+
+If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/).
 
 
 ![alt text](/res/S0F0.png)
@@ -41,7 +43,7 @@ Make sure the instance has internet access. If you need help with these steps, m
 
 
 
-7. Once the instance is launched, try to connect to it via terminal. If you need help, [check the options here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
+7. Once the instance is launched and contains the Role, try to connect to it via terminal. If you need help, [check the options here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
 
 
 If you can connect to your instance then **You should now be ready to start with the workshop.**
