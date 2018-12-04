@@ -1,21 +1,22 @@
-# Getting Started 
+# Getting things ready to kick-off 
 
-This is the first section of the AWS KMS Workshop, please ensure you have read and understood the [prerequisites for the workshop](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop#pre---requisites).
+This is the first section of the AWS KMS Workshop, please ensure you have read and understood the [prerequisites for the workshop](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop#pre---requisites). if you have, please follow the following steps to create all the artifacts we will be using during the workshop:
 
 1. Login into your AWS account and navigate to the region you want work in. 
-2. Click on the following link to install the CloudFormation template that will create the needed Roles and S3 Buckets. 
-3. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). Make sure the instance has internet access. We will use this instance to work with the AWS CLI, so you can select a really small instance. If you need help with CloudFormation stacks, see [this section of the documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)
-4. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP.
 
-(**NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance)
+2. Click on the following link to install the CloudFormation template that will create the needed Roles and S3 Buckets. 
+
+3. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). Make sure the instance has internet access. We will use this instance to work with the AWS CLI, so you can select a really small instance. If you need help with CloudFormation stacks, see [this section of the documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)
+
+4. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
 
 5. Once the instance is launched, try to connect to it via terminal. If you need help, [check the documentation here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
 
-You should now be ready to start with the workshop.
+**You should now be ready to start with the workshop.**
 
 
 
---
+---
 
 # Operating with AWS KMS and CMKs
 
