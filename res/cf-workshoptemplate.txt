@@ -1,0 +1,51 @@
+{
+      "AWSTemplateFormatVersion" : "2010-09-09",
+         
+      "Resources" : {
+
+         "workshopbucket" : {
+             "Type" : "AWS::S3::Bucket",
+             "Properties": {
+                "BucketName" : { "Fn::Join" : [ "-", [ "kmsworkshop", { "Ref" : "AWS::Region" } ] ] }
+			   }
+                       },
+	"KMSWorkshopInstanceInitRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "RoleName":  "KMS-WorkshopInstanceInitRole",
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                  "ec2.amazonaws.com"
+                ]
+              },
+              "Action": [
+                "sts:AssumeRole"
+              ]
+            }
+          ]
+        },
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AmazonS3FullAccess",
+          "arn:aws:iam::aws:policy/AWSKeyManagementServicePowerUser",
+          "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
+	  "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+
+        ]
+      }
+    }
+
+
+
+
+
+
+
+
+      }
+}
+
