@@ -6,7 +6,7 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
 
 
 2. Click on the following link to install the CloudFormation template that will create the needed Roles and S3 Buckets.
-   The template will create a Role named "**KMSWorkshop-InstanceInitRole**" and a bucket named "**KMSWorkshop-AccountID**", where AccountID is the ID of your account
+   The template will create a Role named "**KMSWorkshop-InstanceInitRole**" and an Amazon S3 bucket named "**kmsorkshop-AccountID**", where AccountID is the ID of your account
    
 
 3. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). 
