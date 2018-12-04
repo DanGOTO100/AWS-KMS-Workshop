@@ -1,14 +1,23 @@
+# Getting Started 
+
+This is the first section of the AWS KMS Workshop, please ensure you have read and understood the [prerequisites for the workshop](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop#pre---requisites).
+
+1. Login into your AWS account and navigate to the region you want work in. 
+2. Click on the following link to install the CloudFormation template that will create the needed Roles and S3 Buckets. 
+3. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). Make sure the instance has internet access. We will use this instance to work with the AWS CLI, so you can select a really small instance. If you need help with CloudFormation stacks, see [this section of the documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html)
+4. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP.
+
+(**NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance)
+
+5. Once the instance is launched, try to connect to it via terminal. If you need help, [check the documentation here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
+
+You should now be ready to start with the workshop.
+
+
+
+--
 
 # Operating with AWS KMS and CMKs
-
-This is the first section of the AWS KMS Workshop, please ensure you have read and understood the [prerequisites for the workshop](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop#pre---requisites), especially you need to launch the following Cloudformation stack that will build the needed resources to work with:
-
-* An EC2 instance to work with the AWS CLI
-* A IAM Role for the EC2 instance with persmission to start with the workshop
-* Security groups associated with the instace, to allow it to be accesible via SSH 
-
-(**NOTE:** The security groups initally allow connections from internet to the SSH port, you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance)
-
 
 In this first section we are going to learn the core operations of AWS KMS, that would allow us to go deeper into the service and its best practices. The section has four main areas:
  * [Creating Customer Master Keys (CMK)](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#creating-customer-master-keys-cmk)
@@ -16,6 +25,7 @@ In this first section we are going to learn the core operations of AWS KMS, that
  * [Rotating AWS KMS CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#rotating-AWS-KMS-CMKs)
  * [Deleting AWS KMS CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Working-with-CMKs.md#deleting-AWS-KMS-CMKs)
 ----
+
 
 ## Creating Customer Master Keys (CMK)
 
