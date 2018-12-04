@@ -28,6 +28,8 @@ In order to set up the working environment for the workshop, you need the follow
 * An AWS account.
 * An user with enough permissions to generate policies and create/modify roles in IAM.
 * An user with permissions to launch EC2 instances and run CloudFormation templates.
+* A VPC, public subnet and security groups (or being able to create them), to launch the EC2 instances.
+  (if you need help with creating those, please use the following [quickstart from AWS](https://aws.amazon.com/quickstart/architecture/vpc/)
 
 ---
 
