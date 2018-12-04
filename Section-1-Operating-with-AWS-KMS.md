@@ -61,9 +61,9 @@ Following **least privilege best practices**, we will be attaching policies with
 
 ### Step 2 - Create Policy and Attach it to the role
 
-We can add the needed permissions via the CLI or the console. We will use the console for this operation.
+We can add the needed permissions via the CLI or the AWS console. We will use the AWS console for this operation.
 
-Logging into the console and navigate to the IAM service. Then click on "**Roles**", left area of the screen.
+Logging into the AWS console, [click here](https://console.aws.amazon.com/?nc2=h_m_mc), and navigate to the IAM service. Then click on "**Roles**", left area of the screen.
 ![alt text](/res/S1F1%20IAM.png)
 <**Figure-1**>
 
