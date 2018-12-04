@@ -1,6 +1,6 @@
 # Getting things ready to kick-off 
 
-This is the first section of the AWS KMS Workshop, please ensure you have read and understood the [prerequisites for the workshop](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop#pre---requisites). if you have, please follow the following steps to create all the artifacts we will be using during the workshop:
+This is the first section of the AWS KMS Workshop, please ensure you have read and understood the [prerequisites for the workshop](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop#pre---requisites). If you have, please follow the following steps to create all the artifacts we will be using during the workshop:
 
 1. Login into your AWS account and navigate to the region you want work in. 
 
