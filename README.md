@@ -1,5 +1,5 @@
 
-![alt text](/res/AWS-KMS.png)
+                                 ![alt text](/res/AWS-KMS.png)
 
 # AWS KMS Workshop
 
@@ -36,7 +36,6 @@ In order to set up the working environment for the workshop, you need the follow
 
 **Once you are ready**, go to the first section of the workshop and launch the needed resources to start the workshop:
 
-![alt text](/res/readytogo.jpg)
 
 
 [Section I - Operating with AWS KMS and the CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Operating-with-AWS-KMS.md).
