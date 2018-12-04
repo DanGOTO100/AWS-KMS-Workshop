@@ -30,8 +30,6 @@ In this first section we are going to learn the core operations of AWS KMS, that
 
 ## Creating Customer Master Keys (CMK)
 
-Let's gets hands-on with KMS. Connect to the instance the instance you created via terminal to  start working with the CMKs.
-
 CMKs are the primary resources in AWS KMS. You can use a CMK to encrypt and decrypt up to 4 kilobytes (4096 bytes) of data. However, most commonly, you will use CMKs to generate, encrypt, and decrypt the [data keys] (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#data-keys) that you use outside of AWS KMS to encrypt your data.
 
 There are different types of CMKs in KMS, [see documentation here](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys) . Our first task in AWS KMS will be to create CMKs that will help us during the rest of the workshop.
@@ -39,8 +37,10 @@ In this section we will create a CMK with key material coming from AWS KMS, and 
 
 ### Step 1 - create CMKs
 
-In order to do that we issue the AWS CLI command "**aws kms create-key**". You can check the whole command syntax in the API reference documentation, however we will make a simple call this time with no parameters.
-Note that you might need to configure your region in AWS CLI. You can do so with command "**aws configure**", leaving all blank except for the default region, choose the code of the region you are working in ([region codes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)). See some example [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
+Let's gets hands-on with KMS. **Connect to the instance the instance you created via terminal** to  start working with the CMKs.
+
+In order to create our first CMK we can issue the AWS CLI command "**aws kms create-key**". You can check the whole command syntax in the API reference documentation, however we will make a simple call this time with no parameters.
+Note that you might need to configure your region in AWS CLI first. You can do so with command "**aws configure**", leaving all blank except for the default region, choose the code of the region you are working in ([region codes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)). See some example [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
 
 ```
 $ aws kms create-key
