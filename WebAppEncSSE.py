@@ -26,7 +26,7 @@ except ImportError:
 
 
 s3 = boto3.resource('s3')
-my_bucket = s3.Bucket('kms-workshop-'+GlobalAcc)
+my_bucket = s3.Bucket('kmsworkshop-'+GlobalAcc)
 
 
 
