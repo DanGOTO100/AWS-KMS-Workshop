@@ -6,7 +6,7 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
 
 
 
-2. Download the Workshop's CloudFormation template on the [following link](https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop/master/res/cf-workshoptemplate.txt). This template will create a Role named "**KMSWorkshop-InstanceInitRole**" and an Amazon S3 bucket named "**kmsorkshop-AccountID**", where AccountID is the ID of your account.
+2. Download the Workshop's **CloudFormation template on the [following link](https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop/master/res/cf-workshoptemplate.txt)**. This template will create a Role named "**KMSWorkshop-InstanceInitRole**" and an Amazon S3 bucket named "**kmsorkshop-AccountID**", where AccountID is the ID of your account.
 
 
    Go to the AWS Console, navigate to "**CloudFormation**" Service and select "**Create Stack**" as you can see in figure below:
