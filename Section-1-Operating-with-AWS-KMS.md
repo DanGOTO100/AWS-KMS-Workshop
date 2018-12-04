@@ -10,10 +10,12 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
    
 
 3. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). 
-Make sure the instance has internet access. If you need help with these steps, make sure you check [this section of the AWS Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html). We will use this instance to work with the AWS CLI, so you can select a really small instance. If you need help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
+Make sure the instance has internet access. If you need help with these steps, make sure you check [this section of the AWS Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html). We will use this instance to work with the AWS CLI, so you can select a really small instance. 
+
+If you need help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
 
-4. Assing the "**KMSWorkshopInitRole**" to the instance you have launched. If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/), or t
+4. Assing the "**KMSWorkshopInitRole**" to the instance you have launched. If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/).
 
 
 ![alt text](/res/S0F0.png)
