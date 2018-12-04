@@ -4,13 +4,22 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
 
 1. Login into your AWS account and navigate to the region you want work in. 
 
-2. Click on the following link to install the CloudFormation template that will create the needed Roles and S3 Buckets. 
+2. Click on the following link to install the CloudFormation template that will create the needed Roles and S3 Buckets.
+   The template will create a Role named "**KMSWorkshopInitRole**".
 
 3. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). Make sure the instance has internet access, if you need help with these steps, make sure you check [this section of the AWS Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html). We will use this instance to work with the AWS CLI, so you can select a really small instance. If you need help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
-4. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
+4. Assing the "**KMSWorkshopInitRole**" to the instance you have launched. If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/), or t
 
-5. Once the instance is launched, try to connect to it via terminal. If you need help, [check the options here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
+![alt text](/res/S0F0.png)
+
+
+
+
+5. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
+
+
+6. Once the instance is launched, try to connect to it via terminal. If you need help, [check the options here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
 
 **You should now be ready to start with the workshop.**
 
