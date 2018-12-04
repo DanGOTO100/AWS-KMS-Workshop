@@ -5,8 +5,16 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
 1. Login into your AWS account and navigate to the region you want work in. 
 
 
-2. Click on the following link to install the CloudFormation template that will create the needed Roles and S3 Buckets.
-   The template will create a Role named "**KMSWorkshop-InstanceInitRole**" and an Amazon S3 bucket named "**kmsorkshop-AccountID**", where AccountID is the ID of your account
+
+2. Download the CloudFormation template on the [following link](https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop/master/res/cf-workshoptemplate.txt). This template that will create a Role named "**KMSWorkshop-InstanceInitRole**" and an Amazon S3 bucket named "**kmsorkshop-AccountID**", where AccountID is the ID of your account.
+
+   Go to the AWS Console, navigate to "**CloudFormation**" Service and select "**Create Stack**" as you can see in figure below:
+   
+![alt text](/res/S0F1.png)
+   
+ Then, in the "**Specify Template**" area, select "**Upload Template**" and browse for the template we downloaded just before. Click "**Next**" and give the stack a name. Hit next. Make sure you click the checkbox "**The following resource(s) require capabilities: [AWS::IAM::Role]**" and click "**Create Stack**". The stack is now being created. If you got lost in the process, please look into the [CloudFormation Stack Creation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)
+   
+   
    
 
 3. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). 
