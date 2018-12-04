@@ -1,5 +1,5 @@
 
-                                 ![alt text](/res/AWS-KMS.png)
+![alt text](/res/AWS-KMS.png)
 
 # AWS KMS Workshop
 
