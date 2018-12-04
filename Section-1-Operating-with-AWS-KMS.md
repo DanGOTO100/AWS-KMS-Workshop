@@ -16,20 +16,19 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
 ![alt text](/res/S0F1.png)
    
    
- 
-     Then, in the "**Specify Template**" area, select "**Upload Template**" and browse for the template we downloaded just        before. Click "**Next**" and give the stack a name. Hit next. Make sure you click the checkbox "**The following  
-     resource(s) require capabilities: [AWS::IAM::Role]**" and click "**Create Stack**". The stack is now being created. If      you got lost in the process, please look into the [CloudFormation Stack Creation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)
+3. Then, in the "**Specify Template**" area, select "**Upload Template**" and browse for the template we downloaded just        before. Click "**Next**" and give the stack a name. Hit next. Make sure you click the checkbox "**The following  
+   resource(s) require capabilities: [AWS::IAM::Role]**" and click "**Create Stack**". The stack is now being created. If      you got lost in the process, please look into the [CloudFormation Stack Creation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)
    
    
    
 
-3. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). 
+4. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). 
 Make sure the instance has internet access. If you need help with these steps, make sure you check [this section of the AWS Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html). We will use this instance to work with the AWS CLI, so you can select a really small instance. 
 
-    If you need help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
+   If you need help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
 
-4. Assing the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/).
+5. Assing the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/).
 
 
 ![alt text](/res/S0F0.png)
@@ -38,11 +37,11 @@ Make sure the instance has internet access. If you need help with these steps, m
 
 
 
-5. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
+6. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
 
 
 
-6. Once the instance is launched, try to connect to it via terminal. If you need help, [check the options here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
+7. Once the instance is launched, try to connect to it via terminal. If you need help, [check the options here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
 
 
 If you can connect to your instance then **You should now be ready to start with the workshop.**
