@@ -17,7 +17,9 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
    
    
    
- Then, in the "**Specify Template**" area, select "**Upload Template**" and browse for the template we downloaded just before. Click "**Next**" and give the stack a name. Hit next. Make sure you click the checkbox "**The following resource(s) require capabilities: [AWS::IAM::Role]**" and click "**Create Stack**". The stack is now being created. If you got lost in the process, please look into the [CloudFormation Stack Creation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)
+   Then, in the "**Specify Template**" area, select "**Upload Template**" and browse for the template we downloaded just        before. Click "**Next**" and give the stack a name. Hit next. Make sure you click the checkbox "**The following  
+   resource(s) require capabilities: [AWS::IAM::Role]**" and click "**Create Stack**". The stack is now being created. If  
+   you got lost in the process, please look into the [CloudFormation Stack Creation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)
    
    
    
@@ -43,7 +45,8 @@ Make sure the instance has internet access. If you need help with these steps, m
 
 6. Once the instance is launched, try to connect to it via terminal. If you need help, [check the options here](https://docs.aws.amazon.com/quickstarts/latest/vmlaunch/step-2-connect-to-instance.html).
 
-**You should now be ready to start with the workshop.**
+
+If you can connect to your instance then **You should now be ready to start with the workshop.**
 
 
 
