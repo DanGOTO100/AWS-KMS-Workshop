@@ -70,7 +70,7 @@ In this section we will create a CMK with key material coming from AWS KMS, and 
 
 ### Step 1 - create CMKs
 
-Let's gets hands-on with KMS. **Connect to the instance the instance you created via terminal** to  start working with the CMKs.
+Let's gets hands-on with KMS. **Connect to the instance created via terminal** to start working with the CMKs.
 
 In order to create our first CMK we can issue the AWS CLI command "**aws kms create-key**". You can check the whole command syntax in the API reference documentation, however we will make a simple call this time with no parameters.
 Note that you might need to configure your region in AWS CLI first. You can do so with command "**aws configure**", leaving all blank except for the default region, choose the code of the region you are working in ([region codes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)). See some example [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration)
