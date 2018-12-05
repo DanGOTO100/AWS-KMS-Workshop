@@ -34,7 +34,7 @@
           "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
 	  "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
 
-        ]
+         ]
       }
     },
     "KMSWorkshopInstanceRole": {
