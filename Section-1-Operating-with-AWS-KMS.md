@@ -32,17 +32,15 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
    If you need ovreall help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
 
-5. Once the EC2 instance is up and running. Assign the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. We do it to ensure that the AWS CLI on the instance has enough permissions to run AWS KMS operations.
+5. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
+
+
+6. Once the EC2 instance is up and running. Assign the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. We do it to ensure that the AWS CLI on the instance has enough permissions to run AWS KMS operations.
 If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/).
 
 
 ![alt text](/res/S0F0.png)
 
-
-
-
-
-6. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
 
 
 
@@ -117,7 +115,7 @@ Following **least privilege best practices**, we will be attaching policies with
 
 We can add the needed permissions via the CLI or the AWS console. We will use the AWS console for this operation.
 
-Logging into the AWS console, [click here](https://console.aws.amazon.com/?nc2=h_m_mc), and navigate to the IAM service. Then click on "**Roles**", left area of the screen.
+Logging into the AWS console by[click here](https://console.aws.amazon.com/?nc2=h_m_mc), and navigate to the IAM service. Then click on "**Roles**", left area of the screen.
 ![alt text](/res/S1F1%20IAM.png)
 <**Figure-1**>
 
