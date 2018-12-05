@@ -12,7 +12,7 @@
 	"KMSWorkshopRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
-        "RoleName":  "KMS-WorkshopInstanceInitRole",
+        "RoleName":  "KMSWorkshop-InstanceInitRole",
         "AssumeRolePolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
@@ -41,7 +41,7 @@
       "Type": "AWS::IAM::InstanceProfile",
       "Properties": {
         "InstanceProfileName":  "KMS-WorkshopInstanceInitRole",
-        "Roles": ["KMS-WorkshopInstanceInitRole"],
+        "Roles": ["KMSWorkshop-InstanceInitRole"],
         "Path": "/"
       }
     }
