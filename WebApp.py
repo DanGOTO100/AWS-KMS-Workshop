@@ -317,5 +317,4 @@ def test(HandlerClass = SimpleHTTPRequestHandler,
 
 
 if __name__ == '__main__':
-    GlobalAcc = raw_input('Enter your Account ID: ')
     test()
