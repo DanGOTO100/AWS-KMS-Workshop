@@ -304,8 +304,8 @@ We have all we need to wrap our key material in order to upload it into AWS KMS.
 
 ### Step 3 - Create the import material and encrypt it for the import
 
-Now, where is our key material? Usually key material will come from an enterprise HSM or other key management system in the company that generates the key.
-For the workshop we will generate it with the OpenSSL library directly in our instance with the following command:
+Now, where is our key material? Usually key material will come from an enterprise HSM or other key management system in the company that would be in charge of generating the keys.
+For the workshop, we will generate the keys with the OpenSSL library directly in our instance. Using the following command:
 
 ```
 $ openssl rand -out genkey.bin 32
