@@ -31,7 +31,6 @@
         },
         "ManagedPolicyArns": [
           "arn:aws:iam::aws:policy/AmazonS3FullAccess",
-          "arn:aws:iam::aws:policy/AWSKeyManagementServicePowerUser",
           "arn:aws:iam::aws:policy/AWSCloudTrailReadOnlyAccess",
 	  "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
 
