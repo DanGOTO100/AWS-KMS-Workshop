@@ -6,7 +6,7 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
 
 
 
-2. Download the Workshop's **CloudFormation template on the [following link](https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop/master/res/cf-workshoptemplate.txt)**. This template will create a Role named "**KMSWorkshop-InstanceInitRole**" and an Amazon S3 bucket named "**kmsorkshop-AccountID**", where AccountID is the ID of your account.
+2. Download the Workshop's **CloudFormation template on the [following link](https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop/master/res/cf-workshoptemplate.txt)**. This template will create a Role named "**KMSWorkshop-InstanceInitRole**" and an Amazon S3 bucket named "**kmsworkshop-accountid**", where accountid is the identifier of your account.
 
 
    Go to the AWS Console, navigate to "**CloudFormation**" Service and select "**Create Stack**" as you can see in figure below:
@@ -16,19 +16,24 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
 ![alt text](/res/S0F1.png)
    
    
-3. Then, in the "**Specify Template**" area, select "**Upload Template**" and browse for the template we downloaded just        before. Click "**Next**" and give the stack a name. Hit next. Make sure you click the checkbox "**The following  
-   resource(s) require capabilities: [AWS::IAM::Role]**" and click "**Create Stack**". The stack is now being created. If      you got lost in the process, please look into the [CloudFormation Stack Creation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)
+3. Then, in the "**Specify Template**" area, select "**Upload Template**" and browse for the template we downloaded just        before. Click "**Next**" and give the stack a name, like "KMSWorkshop-Stack". Hit "**Next**". Leave the default values that appear in this new page and hit "**Next**" again. In this new page, make sure you click the checkbox "**The following  
+   resource(s) require capabilities: [AWS::IAM::Role]**" at the botton, and click "**Create Stack**". 
+   
+   The stack is now being created. If      you got lost in the process, please look into the [CloudFormation Stack Creation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)
    
    
    
 
-4. Once the CloudFormation Stack is Ready, launch an instance on the VPC of your choice (but in the same region you started in). 
-Make sure the instance has internet access. If you need help with these steps, make sure you check [this section of the AWS Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html). We will use this instance to work with the AWS CLI, so you can select a really small instance. 
+4. Once the CloudFormation Stack is Ready, launch an instance from Amazon Linux AMI on the VPC and subnet of your choice (but in the same region you started in). We will use this instance to work with the AWS CLI, so you can select a really small instance size, like "t2.micro". 
 
-   If you need help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
+You can always create the VPC and Subnet when you launch the instance, at Step 3: "**Configure Instance Details**".
+It is important that you make sure the instance has internet access in the subnet it is launched. You need to use an Internet Gateway and update the subnet Route table.
+If you need help with these steps, make sure you check [this section of the AWS Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html).
+
+   If you need ovreall help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
 
-5. Assing the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. We will ensure that the AWS CLI on the instance has enough permissions to run AWS KMS operations.
+5. Once the EC2 instance is up and running. Assign the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. We do it to ensure that the AWS CLI on the instance has enough permissions to run AWS KMS operations.
 If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/).
 
 
