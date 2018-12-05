@@ -74,7 +74,21 @@ Time to get hands-on with KMS. **Connect to the instance created via terminal** 
 
 In order to create our first CMK, we will use the [AWS CLI](https://aws.amazon.com/cli/) in the instance. We will use it, instead of the AWS console, beacuse it will provide you with deeper insights and understanding of the process. Once you understand it, creating CMKs from the console will be a breeze.
 
-To use the AWS CLI you might need to configure your region in AWS CLI first. You can do so with command "**aws configure**" in the instance once you are connected via terminal.Leave all fields blank except for the default region. Choose the code of the region you are working in ([region codes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)) and set it as default region in AWS CLI. See an example [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration).
+To use the AWS CLI you might need to configure your region in AWS CLI first. You can do so typing the command "**aws configure**" in the instance once you are connected via terminal. 
+Leave all fields blank except for the default region. Choose the code of the region you are working in ([region codes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)) and set it as default region in AWS CLI. 
+
+See an example below setting up Ireland as the default region:
+
+```
+[ec2-user@ip-10-0-1-16 ~]$ aws configure
+AWS Access Key ID [None]: 
+AWS Secret Access Key [None]: 
+Default region name [None]: eu-west-1
+Default output format [None]: 
+[ec2-user@ip-10-0-1-16 ~]$ 
+```
+
+More information can be found [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration).
 
 Once AWS CLI is ready, try typing the following command to create the key:
 
