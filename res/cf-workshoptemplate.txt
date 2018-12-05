@@ -9,10 +9,10 @@
                 "BucketName" : { "Fn::Join" : [ "-", [ "kmsworkshop", { "Ref" : "AWS::Region" } ] ] }
 			   }
                        },
-	"KMSWorkshopInstanceInitRole": {
+	"KMSWorkshopRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
-        "RoleName":  "KMS-WorkshopInstanceInitRole",
+        "RoleName":  "KMSWorkshopRole",
         "AssumeRolePolicyDocument": {
           "Version": "2012-10-17",
           "Statement": [
@@ -36,8 +36,15 @@
 
         ]
       }
+    },
+    "KMSWorkshopInstanceRole": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "InstanceProfileName":  "KMS-WorkshopInstanceInitRole",
+        "Roles": ["KMSWorkshopRole"],
+        "Path": "/"
+      }
     }
-
 
 
 
@@ -47,4 +54,3 @@
 
       }
 }
-
