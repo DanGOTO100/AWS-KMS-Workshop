@@ -24,9 +24,7 @@ This is the first section of the AWS KMS Workshop, please ensure you have read a
    
    
 
-4. Once the CloudFormation Stack is Ready, launch an instance from Amazon Linux AMI on the VPC and subnet of your choice (but in the same region you started in). We will use this instance to work with the AWS CLI, so you can select a really small instance size, like "t2.micro". 
-
-  You can always create the VPC and Subnet when you launch the instance, at Step 3: "**Configure Instance Details**".
+4. Once the CloudFormation Stack is Ready, launch an instance from Amazon Linux AMI on the VPC and subnet of your choice (but in the same region you started in). We will use this instance to work with the AWS CLI, so you can select a really small instance size, like "t2.micro". You can always create the VPC and Subnet when you launch the instance, at Step 3: "**Configure Instance Details**".
   It is important that you make sure the instance has internet access in the subnet it is launched. You need to use an    
   Internet Gateway and update the subnet Route table.
   If you need help with these steps, make sure you check [this section of the AWS Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html).
