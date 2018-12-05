@@ -123,7 +123,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 s3c=boto3.client('s3')
                 data = open(fn, 'rb')
                 filena = fn.split("/")[-1]
-                BUCKET = 'kmsworkshop'+GlobalAcc
+                BUCKET = 'kmsworkshop-'+GlobalAcc
                 # provide the ID of key to use for Server Side Encryption
                 keyKMS = GlobalKey
                 uplo = s3c.put_object(Bucket=BUCKET,
