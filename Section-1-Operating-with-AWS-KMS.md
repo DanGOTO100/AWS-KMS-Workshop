@@ -77,15 +77,15 @@ In order to create our first CMK, we will use the [AWS CLI](https://aws.amazon.c
 To use the AWS CLI you might need to configure your region in AWS CLI first. You can do so typing the command "**aws configure**" in the instance once you are connected via terminal. 
 Leave all fields blank except for the default region. Choose the code of the region you are working in ([region codes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)) and set it as default region in AWS CLI. 
 
-See an example below setting up Ireland as the default region:
+See an example below setting up Ireland as the default region in AWS CLI:
 
 ```
-[ec2-user@ip-10-0-1-16 ~]$ aws configure
+[ec2-user@ip-10-0-X-X ~]$ aws configure
 AWS Access Key ID [None]: 
 AWS Secret Access Key [None]: 
 Default region name [None]: eu-west-1
 Default output format [None]: 
-[ec2-user@ip-10-0-1-16 ~]$ 
+[ec2-user@ip-10-0-X-X ~]$ 
 ```
 
 More information can be found [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-quick-configuration).
@@ -497,7 +497,7 @@ If you may want to delete it **immediately**, you could issue a command like the
 **The command below is for information purposes, don´t execute it as part of the lesson**. 
 If for any reason you delete the key we generated with our own key material "**ImportedCMK**", later you wwould have to import again your key material into the CMK and into the same alias to get it back to an usable state
 
-## just for information
+## Just for information
 ```
 $ delete-imported-key-material --key-id  your-key-id.   
 ```
