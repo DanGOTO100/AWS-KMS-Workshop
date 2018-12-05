@@ -121,7 +121,7 @@ class SimpleHTTPRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 # we got the file in the server, Uploading it now to S3            
                 data = open(fn, 'rb')
                 filena = fn.split("/")[-1]
-                uplo = s3.Bucket('kms-workshop-accountID').put_object(Key=filena, Body=data)
+                uplo = s3.Bucket('kmsworkshop'+GlobalAcc).put_object(Key=filena, Body=data)
                 if uplo:
                     print("Upload to S3 OK")
                 else:
