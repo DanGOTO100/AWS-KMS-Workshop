@@ -229,7 +229,7 @@ In this section we are going to generate a CMK importing our own key material.
 
 The first step to do so is to issue the same create-key command but indicating the origin is external - this is, the key material will not come from AWS KMS, but from an external source
 
-$aws kms create-key --origin EXTERNAL
+$ aws kms create-key --origin EXTERNAL
 
 ```
 {
@@ -257,7 +257,7 @@ Now, we need to download a public key and an import token from AWS KMS, so we ca
 To download the public key and import token needed for the wrapping, we need to execute the following command, replacing "**external-key-id**" with the KeyId obtained in the previous step:
 
 ```
-aws kms get-parameters-for-import --key-id external-key-id  --wrapping-algorithm RSAES_OAEP_SHA_1 --wrapping-key-spec RSA_2048
+$ aws kms get-parameters-for-import --key-id external-key-id  --wrapping-algorithm RSAES_OAEP_SHA_1 --wrapping-key-spec RSA_2048
 ```
 
 
@@ -306,7 +306,7 @@ It will generate a 256 bit symmetric key and stores into file **genkey.bin**.
 The key that the file contains is our key material.
 We will wrap it now with the public and import token obatined from AWS KMS before:
 ```
-openssl rsautl -encrypt -in genkey.bin -oaep -inkey pkey.bin -keyform DER -pubin -out WrappedKeyMaterial.bin
+$ openssl rsautl -encrypt -in genkey.bin -oaep -inkey pkey.bin -keyform DER -pubin -out WrappedKeyMaterial.bin
 ```
 
 This command takes the generated key material and encrypt it with the public key we downloaded from AWS KMS. Then, saves the output in another file ** WrappedKeyMaterial.bin**.
