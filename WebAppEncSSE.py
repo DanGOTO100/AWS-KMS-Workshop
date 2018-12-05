@@ -24,6 +24,7 @@ try:
 except ImportError:
     from StringIO import StringIO
 
+GlobalAcc =  boto3.client('sts').get_caller_identity().get('Account')
 
 s3 = boto3.resource('s3')
 my_bucket = s3.Bucket('kmsworkshop-'+GlobalAcc)
@@ -324,5 +325,4 @@ def test(HandlerClass = SimpleHTTPRequestHandler,
 
 if __name__ == '__main__':
     GlobalKey = raw_input('Enter the KeyId of the CMK to use with SSE: ')
-    GlobalAcc = raw_input('Enter your Account ID: ')
     test()
