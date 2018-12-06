@@ -9,7 +9,7 @@ As as baseline, in AWS KMS you may want to monitor:
 
 To monitor that activity we will the AWS service [AWS CloudTrail](https://aws.amazon.com/cloudtrail/) and [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/), escecially its logs, events and alarms.
 
---
+---
 ### AWS KMS and AWS CloudTrail
 
 AWS KMS is integrated with [AWS CloudTrail](https://aws.amazon.com/cloudtrail/). AWS CloudTrail is a service that will provide us with a record of actions performed by a user, role, or an AWS service in AWS KMS.
@@ -33,20 +33,20 @@ You will have a display of the GenerateDataKey operations that you have performe
 ![alt text](/res/S4F1.png)
 <**Figure-1**>
 
-If you open any of the request in the list,  you will have further details of the operation that took place and. For example take a look at the "**User name**" responsible for the requests and write it down, we will use it later. These parameters provides us with a full view of who, what, how and when an operation took place.
+If you open any of the request in the list,  you will have further details of the operation that took place and. For example take a look at the "**User name**" value responsible for the requests and write it down, we will use it later. These parameters provides us with a full view of who, what, how and when an operation took place.
 
 In CloudTrail you can not only filter by event names on AWS KMS operations. There are other filter parameters that you can use. For example, you can use filtering by "**Event source**", that would allow you understand which AWS service has made request.
 
 The filter parameter "**User name**" allows you to filter by the identity of the user referenced in the event.
 Another useful parameter is the "**AWS Access Key**". With it, you can filter by the AWS access key ID that was used to sign the request. If the request was made with temporary credentials, the access key ID of the temporary credential is what will show up as the access key.
 
-AWS KMS produces a long list of other operations that are due to be filtered in CloudWatch. We have seen the filtering with "**GenerateDataKey**". 
-
 Now let's try to set up a new filter by "**User Name**" attribute. For the attribute value, use the same "**User name**" that you have obtained in one of the request listed when you filtered by "**GenerateDataKey**" Event name. 
-You should obtain a full list of AWS KMS operations performed by the user. Also other logged operations in other services, if the user has made any.
+You should obtain a full list of AWS KMS operations performed by the user. Also other logged operations in other services, if the user has made any. An example in figure below:
+
 
 ![alt text](/res/S4F15.png)
 <**Figure-2**>
+
 
 You can filter by many other parameters to collect all needed information to audit AWS KMS usage. A list of AWS KMS events that can be displayed in CloudTrail can be checked in this part of the [AWS KMS Documentation](https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html).
 
@@ -55,21 +55,21 @@ Let's create, for example, custom notifications based on AWS Cloudtrail events c
 
 ---
 
-### AWS KMS. Real time notifications with AWS CloudTrail, Amazon CLoudWatch and Amazon SNS.
+### AWS KMS Real time notifications with AWS CloudTrail, Amazon CLoudWatch and Amazon SNS.
 
-What we are going to do is to create a notification system with [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/), [AWS CloudTrail](https://aws.amazon.com/cloudtrail/) and [Amazon SNS](https://aws.amazon.com/sns/).
-We will do through the AWS console. 
+In this part of the monitoring section, we are going to create a notification system that will notify us when certain type of events happen and are logged in CloudTrail. We will use the following services: [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/), [AWS CloudTrail](https://aws.amazon.com/cloudtrail/) and [Amazon SNS](https://aws.amazon.com/sns/). Let's open the AWS console. 
+
+
 First, let's create a notification topic and subscribe to it. The Topic will allow us to receive notifications when an event we define in CloudWatch coming from CloudTrail is triggered.
-
-In the console, navigate to Simple Notification Service (SNS) service. Click on "**Create Topic**" and provide a topic name and a display name. Any name may work for topic name, try with "**snsworkshop**". Choose now a  display name, it must not exceed 10 characters anyway. 
-Take note of the "**Topic ARN**" listed as a result of your topic creation. Something like: "*arn:aws:sns:your-region:yout-account-id:snsworkshop*"
+In the AWS console, navigate to Simple Notification Service (SNS) service. Click on "**Create Topic**" and provide a topic name and a display name. Any name may work for topic name, try with "**snsworkshop**". Choose now a  display name, it must not exceed 10 characters anyway. 
+Take note of the "**Topic ARN**" listed as a result of your topic creation. Something like: "**arn:aws:sns:your-region:yout-account-id:snsworkshop**"
 
 Now on the right pane, select "**Subscriptions**" and click on "**Create subscriptions**".
-Provide the topic ARN that you took note in the previous step and in "Protocol" select "Email". Provide SNS with your mail.
+Provide the topic ARN that you took note in the previous step and in "**Protocol**" select "**Email**". Provide SNS with your mail.
 In a moment, you will receive an email to confirm your subscription.  
 
-With this, navigate to now to Amazon CloudWatch service in the AWSconsole.
-Inside Amazon CloudWatch, look in the right pane and select "**Events**".
+With this, navigate to now to Amazon CloudWatch service in the AWS console.
+Inside Amazon CloudWatch, look in the right pane and click on "**Events**".
 Leave "**Event Pattern**" clicked and select "**Events by Service**" in the "**Build event pattern to match...**" area.
 
 ![alt text](/res/S4F2.png)
@@ -93,11 +93,7 @@ You are ready to hit the "**Configure details**" button on the botton of the pag
 Now just provide a name to the rule and hit "**Create Rule**".
 
 You have just created a rule that will help you audit AWS KMS usage. Everytime a Data Key is generated, you wil be notified in the email address you provided. 
-Let's test it by calling the GenerateDataKey operation again.
 
-```
-$ aws kms generate-data-key --key-id alias/ImportedCMK --key-spec AES_256 --encryption-context project=workshop
-```
 If everything went well you should  receive an email notifying you of the operation that took place. 
 **Note:** Don´t forget to hae confirmed your subcripution to SNS topic (you should have recevied an email).
 We have established a notification for a specific operation. For a comprehensive list of the log entries that AWS KMS generates in AWS CloudTrail, please check the following [section of the AWS KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/logging-using-cloudtrail.html).
@@ -105,7 +101,7 @@ We have established a notification for a specific operation. For a comprehensive
 
 ### AWS KMS and CloudWatch Metrics
 
-In Amazon Cloudwatch you also have **metrics** about the AWS KMS service. For example,  when you import key material into a CMK and set it to expire, AWS KMS sends metrics and dimensions to CloudWatch.
+In Amazon Cloudwatch you also have **metrics** avaiable about the AWS KMS service and CMKs. For example,  when you import key material into a CMK and set it to expire, AWS KMS sends metrics and dimensions to CloudWatch.
 For details on the dimensions of these metrics, you can check the [following section](https://docs.aws.amazon.com/kms/latest/developerguide/monitoring-cloudwatch.html) of the AWS KMS documentation.
 With Amazon Cloudwatch you can create alarms and dashboards that will give you certain insights on AWS KMS. 
 
@@ -135,16 +131,16 @@ Congratulations for making it to the end of the workshop. You should now have a 
 
 In order to clean up the resources we have used along the workshop, we need to perform a few steps, in the order they are listed:
 
-	1. Schedule for deletion the CMKs we have created. At this point it is very easy for you to do it. You can either use the AWS console, browsing to the IAM service, selecting "**Encryption keys" in the left pane.
-	You may also use the AWS CLI commands. In first section of the document, you learned how to delete CMKs
+1. Schedule for deletion the CMKs we have created. At this point it is very easy for you to do it. You can either use the AWS console, browsing to the IAM service, selecting "**Encryption keys" in the left pane.
+You may also use the AWS CLI commands. In first section of the document, you learned how to delete CMKs
 	
-	2. Detach the Role from the EC2 instance. You need to follow the same procedure you used to attach it. If you need to refresh it, go back to the first section of the workshop, in the "Getting stated to kick-off" section.
+2. Detach the Role from the EC2 instance. You need to follow the same procedure you used to attach it. If you need to refresh it, go back to the first section of the workshop, in the "Getting stated to kick-off" section.
 
-	3. Still on the AWS Console, navigate to the IAM service again and select "**Roles**" on the left pane. Locate the Role we have been working on all the workshop: "**KMSWorkshop-InstanceInitRole**" and detach from it all the customer policies that we have created. To do it, one you are in the "**KMSWorkshop-InstanceInitRole**" Role screen, click on the black "x" on the right side of the policy listing.
+3. Still on the AWS Console, navigate to the IAM service again and select "**Roles**" on the left pane. Locate the Role we have been working on all the workshop: "**KMSWorkshop-InstanceInitRole**" and detach from it all the customer policies that we have created. To do it, one you are in the "**KMSWorkshop-InstanceInitRole**" Role screen, click on the black "x" on the right side of the policy listing.
 	
-	4. Now you can terminate the EC2 instance. The process is very simple, just select the instance in the EC2 service within the AWS Console and in "**Actions**" select "**Terminate Instance**".
+4. Now you can terminate the EC2 instance. The process is very simple, just select the instance in the EC2 service within the AWS Console and in "**Actions**" select "**Terminate Instance**".
 	
-	5. The final step is to delete the CloudFormation Stack that we had launched at the beginning of the workshop. To do it, just go back to the CloudFormation service again within the AWS Console. In the "**Stacks**" menu, select the stack used to launch the workshop and in the "**Actions**" button, click on "**Delete Stack**"
+5. The final step is to delete the CloudFormation Stack that we had launched at the beginning of the workshop. To do it, just go back to the CloudFormation service again within the AWS Console. In the "**Stacks**" menu, select the stack used to launch the workshop and in the "**Actions**" button, click on "**Delete Stack**"
 
 
 All the resources should now have been deleted from your account, with the exception of the CMKs, they will not be deleted until the scheduled delete date is met.
