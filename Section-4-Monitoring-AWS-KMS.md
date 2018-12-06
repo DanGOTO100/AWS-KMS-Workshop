@@ -131,10 +131,10 @@ Congratulations for making it to the end of the workshop. You should now have a 
 
 In order to clean up the resources we have used along the workshop, we need to perform a few steps, in the order they are listed:
 
-1. Schedule for deletion the CMKs we have created. At this point it is very easy for you to do it. You can either use the AWS console, browsing to the IAM service, selecting "**Encryption keys" in the left pane.
+1. Schedule for deletion the CMKs we have created. At this point it is very easy for you to do it. You can either use the AWS console, browsing to the IAM service, selecting "**Encryption keys**" in the left pane.
 You may also use the AWS CLI commands. In first section of the document, you learned how to delete CMKs
 	
-2. Detach the Role from the EC2 instance. You need to follow the same procedure you used to attach it. If you need to refresh it, go back to the first section of the workshop, in the "Getting stated to kick-off" section.
+2. Detach the Role from the EC2 instance. You need to follow the same procedure you used to attach it. If you need to refresh it, go back to the first section of the workshop, in the "Getting things ready to kick-off" section.
 
 3. Still on the AWS Console, navigate to the IAM service again and select "**Roles**" on the left pane. Locate the Role we have been working on all the workshop: "**KMSWorkshop-InstanceInitRole**" and detach from it all the customer policies that we have created. To do it, one you are in the "**KMSWorkshop-InstanceInitRole**" Role screen, click on the black "x" on the right side of the policy listing.
 	
