@@ -67,12 +67,7 @@ Upload it through the WebApp.
 
 
 You should get to a page informing that the operation was successul. 
-
-![alt text](/res/S3F2.png)
-<**Figure-2**>
-
-
-Now, go back  and check that it is showing  and then click on it, to download it and display it.
+Now, go back ("**press back link in Success page**)  and check that it is the file is showing up in the main serfver's page. You can now click on it, to download it and display it.
 
 If you refresh the page in your browser, you will notice the same file appears now as a local file with prefix "localfile". The Web App is designed to create also a further local cache.
 
