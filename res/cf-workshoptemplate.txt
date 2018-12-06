@@ -40,7 +40,7 @@
     "KMSWorkshopInstanceRole": {
       "Type": "AWS::IAM::InstanceProfile",
       "Properties": {
-        "InstanceProfileName":  "KMS-WorkshopInstanceInitRole",
+        "InstanceProfileName":  "KMSWorkshop-InstanceInitRole",
         "Roles": ["KMSWorkshop-InstanceInitRole"],
         "Path": "/"
       }
