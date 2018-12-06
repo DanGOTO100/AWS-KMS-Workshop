@@ -42,15 +42,14 @@ We will need to obtain the instance IP to connect to it from the Internet. We wi
 
 ```
 $ sudo curl http://169.254.169.254/latest/meta-data/public-ipv4/
- 
-54.X.X.44
+  54.X.X.44
 ```
 We can run the server now with the following command:
 
 ```
 $ sudo python WebApp.py 80
-
-Serving HTTP on 0.0.0.0 port 80 ...
+  
+  Serving HTTP on 0.0.0.0 port 80 ...
 
 ```
 
@@ -106,8 +105,9 @@ Howeverit is more clear if we download a version of the WebApp with the changes 
 Stop the server from running with CTRL+C (maybe twice)
 Download the version of the Web App that **adds Server Side Encryption** and run the server again:
 
+```
 $  sudo wget https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop/master/WebAppEncSSE.py
-
+```
 We are going to need the KeyId of the CMK we pretend to use for the encryption of the files. The CMK we pretend to use is the one generated with our import material and which alias was "**ImportedCMK**".
 
 Issue the following command to display your working keys and identify the KeyId of "ImportedCMK" if you don´t find it in your notes.
