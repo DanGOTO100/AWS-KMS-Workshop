@@ -7,8 +7,8 @@ this section has the following parts:
 * [Installing the Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-1---installing-the-web-app)
 * [Adding Encryption to the Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-2---adding-encryption-to-the-web-app)
 * [Working with Key Policies](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-3---working-with-key-policies)
-* [Key Policies and VPC Private Endpoint](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-4---creating-an-aws-kms-private-endpoint)
-* [AWS KMS key tagging](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-5---vpc-endpoints-and-key-policies)
+* [Key Policies and VPC Private Endpoint](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-4---vpc-endpoints-and-key-policies)
+* [AWS KMS key tagging](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-5---key-tagging)
 ---
 
 ### Part 1 - Installing the Web App
