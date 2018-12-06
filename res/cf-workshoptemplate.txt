@@ -6,7 +6,7 @@
          "workshopbucket" : {
              "Type" : "AWS::S3::Bucket",
              "Properties": {
-                "BucketName" : { "Fn::Join" : [ "-", [ "kmsworkshop", { "Ref" : "AWS::Region" } ] ] }
+                "BucketName" : { "Fn::Join" : [ "-", [ "kmsworkshop", { "Ref" : "AWS::AccountId" } ] ] }
 			   }
                        },
 	"KMSWorkshopRole": {
