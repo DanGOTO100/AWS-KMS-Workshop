@@ -81,9 +81,9 @@ If you refresh the page in your browser, you will notice the same file appears n
 
 The S3 bucket with its corresponding files is well protected under Bucket Policies and IAM policies. Currently, the role we have set in the working instance, has read and write access to the S3 bucket. 
 However, for some reason, other instances or users may need read access to the bucket.
-It might be desirable that we encrypt the files with the CMK we have create importing our key material, to add  protection for the files in bucket. 
+It might be desirable that we encrypt the files with the CMK we have created importing our key material, to add protection for our files in bucket. 
 
-In order to do that, the Web App is using boto3 python S3 APIs to upload the files. We need to use the appropriate API to upload the files using Server Side Encryption (SSE) with AWS KMS and the CMK we created. 
+In order to do that, the Web App is using boto3 python S3 APIs to upload the files. We need to use the appropriate API to upload the files using Server Side Encryption "**(SSE)**" with AWS KMS and the CMK we created. 
 
 The API as stated in the [Amazon S3 documentation](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3.html#id217), has this structure:
 
@@ -97,17 +97,18 @@ s3.put_object(Bucket=BUCKET,
 ```
 
 We could very easily modify the code in our App to include the Server Side Encryption (SSE). 
-Howeverit is more clear if we download a version of the WebApp with the changes already implemented, and hence that provides Server Side Encryption using one of our CMKs.
+However, it is more clear if we download a version of the WebApp with the changes already implemented in the code, and hence that provides Server Side Encryption using one of our CMKs.
 
-Stop the server from running with CTRL+C (maybe twice)
+Stop the server from running with CTRL+C (maybe twice). 
 Download the version of the Web App that **adds Server Side Encryption** and run the server again:
 
 ```
 $  sudo wget https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop/master/WebAppEncSSE.py
 ```
-We are going to need the KeyId of the CMK we pretend to use for the encryption of the files. The CMK we pretend to use is the one generated with our import material and which alias was "**ImportedCMK**".
 
-Issue the following command to display your working keys and identify the KeyId of "ImportedCMK" if you don´t find it in your notes.
+We are going to need the KeyId of the CMK we pretend to use for the encryption of the files. The CMK we want to use is the one generated with our import material and which alias was "**ImportedCMK**".
+
+Issue the following command to display your working keys and identify the KeyId of "ImportedCMK", in case you don´t find it in your notes.
 
 ```
 $ aws kms list-aliases
@@ -121,21 +122,21 @@ $ aws kms list-aliases
         }, 
 
 ```
-**NOTE:** If you run into trouble with this command and get errors complaining about "import awscli.clidriver", a verions mismatch with AWS CLI installed by boto3, then use the following command to go back to normal:
+**NOTE:** If you run into trouble with this command and get errors complaining about "import awscli.clidriver", a version mismatch with AWS CLI installed by boto3, then use the following command to go back to normal:
 
 ```
 $ sudo yum downgrade aws-cli.noarch python27-botocore -y
 ```
 
 
-Copy the value under **TargerKeyID**, it is the KeyID of our CMK and we are going to need when we start our file upload server. Keep it handy, we will use several times in this section of the workshop.
-Now it is time to start the server with encryption:
+Copy the value under **TargerKeyId**, it is the KeyID of our CMK and we are going to need when we start our file upload server. Keep it handy, we will use several times in this section of the workshop.
+Now it is time to start the server with encryption included in the code:
 
 ```
 $ sudo python WebAppEncSSE.py 80
 ```
 
-Enter the KeyID of the CMK we have obtained in the previous step when asked. Make sure it is the right one, otherwise the upload will fail. 
+Enter the KeyId of the CMK we have obtained in the previous step when asked. Make sure it is the right one, otherwise the upload will fail. 
 
 Once the server is running on port 80, go back again into your laptop's browser and refresh the file uploader server page. Try to upload again the text file you created before, "SampleFile-KMS.txt".
 
