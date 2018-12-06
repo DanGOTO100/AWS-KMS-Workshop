@@ -53,7 +53,9 @@ $ sudo python WebApp.py 80
 
 ```
 
-Go to a browser now and navigate to the Web App in the URL you obtained in the previous step:  http://54.X.X.44
+Go to your browser now and navigate to the Web App in the IP you obtained in the previous step:  http://54.X.X.44
+
+
 **Note:** if you run into issues with reaching the server, it may be worthy to recheck the security group associated with the server, ensure HTTP traffic is allowed. Use [this link to the Security Groups documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html). 
 
 ![alt text](/res/S3F1.png)
