@@ -124,6 +124,11 @@ $ aws kms list-aliases
         }, 
 
 ```
+**NOTE:** If you run into trouble with this command and get errors complaining about "import awscli.clidriver", a verions mismatch with AWS CLI installed by boto3, then use the following command to go back to normal:
+
+```
+$ sudo yum downgrade aws-cli.noarch python27-botocore -y
+```
 
 
 Copy the value under **TargerKeyID**, it is the KeyID of our CMK and we are going to need when we start our file upload server. Keep it handy, we will use several times in this section of the workshop.
@@ -178,7 +183,7 @@ $ aws kms list-key-policies --key-id your-key-id
     ]
 }
 ```
-**NOTE:** if you run into trouble with this command and get errors complaining about "import awscli.clidriver", a verions mismatch with AWS CLI, then use the following command to go back to normal:
+**NOTE:** Remember that if you run into trouble with this command and get errors complaining about "import awscli.clidriver", a verions mismatch with AWS CLI installed by boto3, then use the following command to go back to normal:
 
 ```
 $ sudo yum downgrade aws-cli.noarch python27-botocore -y
