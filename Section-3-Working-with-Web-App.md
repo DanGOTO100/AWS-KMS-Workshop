@@ -38,13 +38,13 @@ $ sudo wget  https://raw.githubusercontent.com/DanGOTO100/Draft-AWS-KMS-Workshop
 
 You have downloaded a python application, named "**WebApp.py**", that will be our test Web App.
 
-We will need to obtain the instance IP to connect to it from the Internet. We will get it from the metadata of the instance. If you need more information about instance metadata, please look into this section of the documentation.
+We will need to obtain the instance IP to connect to it from the Internet. We will get it from the metadata of the instance. If you need more information about instance metadata, please look into this [section of the AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html).
 
 ```
 $ sudo curl http://169.254.169.254/latest/meta-data/public-ipv4/
   54.X.X.44
 ```
-We can run the server now with the following command:
+We have the public IP of our instance now, write down as we will use to connect later. Let's run the web server with the following command:
 
 ```
 $ sudo python WebApp.py 80
