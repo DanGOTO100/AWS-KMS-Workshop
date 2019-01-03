@@ -15,8 +15,8 @@ The workshop contains four different sections (**NOTE:** designed to be followed
 * [Workshop Environment Set-up](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-0-Workshop-Environment-Set-up.md)
 * [Section I - Operating with AWS KMS and the CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Operating-with-AWS-KMS.md)
 * [Section II - Encryption with AWS KMS](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-2-Encryption-with-AWS-KMS.md)
-* [Section III - Key Policies and best practices - Working with a Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-2-Encryption-with-AWS-KMS.md)
-* [Section IV - Monitoring AWS KMS](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Operating-with-AWS-KMS.md).
+* [Section III - Key Policies and best practices - Working with a Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md)
+* [Section IV - Monitoring AWS KMS](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-4-Monitoring-AWS-KMS.md).
 
 The workshop is mostly practical and will operate in AWS KMS using the AWS CLI (through an EC2 instance), AWS console and AWS KMS API calls, to get a better understanding of the different options. 
 
