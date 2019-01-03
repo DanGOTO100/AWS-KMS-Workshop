@@ -305,7 +305,7 @@ $ aws kms decrypt --ciphertext-blob fileb://NewSecretsEncryptedFile.txt --encryp
 
 If you now take a look at the file we have created with the previous command "**NewSecretsDecryptedFile.txt**". The secret text is now back unencrypted and ready for us.
 
-You have completed the second section of the workshop. In the next section we will work with a real-life Web App and will try to implement best practices.
+You have completed the second section of the workshop. In the next section we will work with a real-life Web App and will try to implement best practices. You can now [navigate to the next section of the Workshop](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md)
 
 
 
