@@ -122,7 +122,7 @@ Select the policy and click the "Attach policy" button at botton right of the pa
 
 ### Step 3 - Create the key  - again - and set an alias
 
-Run the aws kms create-key command again and this time you will get the result from the creation og the key as a JSON block with the metadata of the key. See example below:
+Run the aws kms create-key command again and this time you will get the result from the creation of the key as a JSON block with the metadata of the key. See example below:
 
 ```
 $ aws kms create-key
@@ -143,7 +143,10 @@ $ aws kms create-key
 }
 
 ```
-There are important fields in the metadata response. First, The **KeyId** is very relevant as it is the unique identifier of the CMK within KMS. It is in the form of five blocks of digits. Take good note of the KeyId as you will be using it during the workshop.Also along the Workshop,I will reference its value as "**your-key-id**", please change it for your corresponding KeyId value when applicable. The ARN of the key and its status ("Enabled", "Disabled") are highly relevant too. Other information is displayed like the Account Id the key belongs and the target key usage, encrypt and decrypt in this case. 
+There are important fields in the metadata response. First, The **KeyId** is very relevant as it is the unique identifier of the CMK within AWS KMS. It is in the form of five blocks of digits. Take good note of the KeyId as you will be using it during the workshop extensively. Also, along the Workshop, I will reference its value as "**your-key-id**". 
+Please change it for your corresponding KeyId value when applicable.
+
+The ARN of the key and its status ("Enabled", "Disabled") are highly relevant too. Other type of information is displayed. For example: the Account Id where the key belongs to. Another relevant piece of information is the the target key usage, this is: encrypt and decrypt in this case. 
 
 If you go back to the AWS console and navigate to the IAM service. Click in the left area to the bottom, "Encryption Keys", the key you have just created is already listed there. **Important: Remember to select the right Region in the KMS screen**. However, as we used the create-key command without parameters, it does not contain any alias to display and looks like its alias is empty. See image below the region selection and the blank alias name.
 
