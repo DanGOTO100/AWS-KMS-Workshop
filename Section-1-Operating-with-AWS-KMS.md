@@ -178,6 +178,22 @@ For the workshop, we will see how creating CMKs, policies and tags can be done f
 With AWS KMS you can import your own key material to create a CMK. In order to do so, a special wrapping is needed to upload your key material to AWS KMS. See more details in [this part of the KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html).
 In this section we are going to generate a CMK importing our own key material.
 
+### What are going to do?
+
+In order to experiment how to import your own key material, we are going to take a few steps.
+
+* First, we will create an empty CMK in AWS KMS. The CMK later will be filled up with the the key material that you generate and import into AWS KMS.
+
+* In order to import your own key material, it is needed to do a special wrapping on it: AWS KMS will provide you with a public key that we will use to wrap our key material. Also, AWS KMS will provide you with an import token that will  use to call the AWS KMS API for importing your wrapped key material. We will, therefore, download both public and import token from AWS KMS and use them accordingly.
+
+* Of course, we need the key material itself. Normally, it will come from an enterprise HSM or any sort of key management system. As per the workshop, we will create one with the library **OpenSSL**. This is the key material that will be wrapped and imported, as described in previous point.
+
+* Finally, we will call the import API, to import it under the empty CMK we created in the first step. Note, this is a very sensible operation and we might or might not have permission to do so. If we don´t, we will needed to create them, based on the **Least Privilege** best practice.
+
+Let's go through to the steps in deep:
+
+
+
 ### Step 1 - Create and empty key with origin set to external
 
 
