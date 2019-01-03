@@ -39,9 +39,9 @@ AWS KMS prior knowledge is not really needed, but if would be great if you take 
 
 # Ready to go?
 
-**Once you are ready**, go to the first section of the workshop and launch the CloudFormation template that will provide with the needed resources to start the workshop:
+**Once you are ready**, go to the set up section of the workshop and launch the CloudFormation template that will provide with the needed resources to start the workshop:
 
-[Section I - Operating with AWS KMS and the CMKs](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Operating-with-AWS-KMS.md).
+[Section 0 - Workshop Environment Set up](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-1-Operating-with-AWS-KMS.md).
 
 
 
