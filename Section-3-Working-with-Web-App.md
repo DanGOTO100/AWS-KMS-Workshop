@@ -484,7 +484,7 @@ For information on the command, please use [this section of the AWS KMS document
 
 
 
-
+This section of the Workshop is now completed. Please, navigate to [the next Section, Monitoring AWS KMS](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-4-Monitoring-AWS-KMS.md).
 
 
 
