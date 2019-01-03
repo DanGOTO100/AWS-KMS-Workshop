@@ -30,7 +30,7 @@ When you are ready, please follow the following steps to create all the artifact
 3. Then, in the "**Specify Template**" area, select "**Upload Template**" and browse for the template we downloaded just        before. Click "**Next**" and give the stack a name, like "KMSWorkshop-Stack". Hit "**Next**". Leave the default values that appear in this new page and hit "**Next**" again. In this new page, make sure you click the checkbox "**The following  
    resource(s) require capabilities: [AWS::IAM::Role]**" at the botton, and click "**Create Stack**". 
    
-   The stack is now being created. If      you got lost in the process, please look into the [CloudFormation Stack Creation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)
+   The stack is now being created. If you got lost in the process, please look into the [CloudFormation Stack Creation documentation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html)
    
    
    
@@ -40,13 +40,13 @@ When you are ready, please follow the following steps to create all the artifact
   Internet Gateway and update the subnet Route table.
   If you need help with these steps, make sure you check [this section of the AWS Documentation](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html).
 
-   If you need ovreall help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
+   If you need overall help with CloudFormation stacks, see [the CloudFormation documenation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
 
-5. Make sure the security groups associated with the instace allow it to be accesible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the follwing [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
+5. Make sure the security groups associated with the instance allow it to be accessible via SSH from your IP. **NOTE:**  you should restrict the initially created security group rule to be accesible only to your IP or the range of IPs from your LAN. Check the following [documentation](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SG_Changing_Group_Membership) if you need guidance.
 
 
-6. Once the EC2 instance is up and running. Assign the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. We do it to ensure that the AWS CLI on the instance has enough permissions to run AWS KMS operations.
+6. Once the EC2 instance is up and running, assign the "**KMSWorkshop-InstanceInitRole**" to the instance you have launched. We do it to ensure that the AWS CLI on the instance has enough permissions to run AWS KMS operations.
 If you need help with the operation, navigate to the EC2 service in the AWS console and take a look into picture below to locate the role attachment option. Optionally, use the following [AWS Security Blog article](https://aws.amazon.com/blogs/security/easily-replace-or-attach-an-iam-role-to-an-existing-ec2-instance-by-using-the-ec2-console/).
 
 
