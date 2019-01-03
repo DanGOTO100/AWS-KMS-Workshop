@@ -4,14 +4,14 @@ In this section, using a Web App, we are going to implement best practices for A
 These best practices are based on the Whitepaper "**[AWS Key Management Service Best Practices](https://d0.awsstatic.com/whitepapers/aws-kms-best-practices.pdf)**"
 
 this section has the following parts:
-* [Installing the Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-1---installing-the-web-app)
-* [Adding Encryption to the Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-2---adding-encryption-to-the-web-app)
-* [Working with Key Policies](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-3---working-with-key-policies)
-* [Key Policies and VPC Private Endpoint](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-4---vpc-endpoints-and-key-policies)
-* [AWS KMS key tagging](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#part-5---key-tagging)
+* [Installing the Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#installing-the-web-app)
+* [Adding Encryption to the Web App](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#adding-encryption-to-the-web-app)
+* [Working with Key Policies](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#working-with-key-policies)
+* [Key Policies and VPC Private Endpoint](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#vpc-endpoints-and-key-policies)
+* [AWS KMS key tagging](https://github.com/DanGOTO100/Draft-AWS-KMS-Workshop/blob/master/Section-3-Working-with-Web-App.md#key-tagging)
 ---
 
-### Part 1 - Installing the Web App
+### Installing the Web App
 
 The Web App is very simple python web server that works as a shared file server, for internal employees for example. It allows to upload and download files to/from  S3. For downloads the Web App keeps a local file in the instance where Web App is running, prefixing the file with "localfile-". Remenber, our instance has a role with a policy attached to it that allow to read/write from S3.
 
@@ -76,7 +76,7 @@ If you refresh the page in your browser, you will notice the same file appears n
 
 ---
 
-### Part 2 - Adding Encryption to the Web App
+### Adding Encryption to the Web App
 
 
 The S3 bucket with its corresponding files is well protected under Bucket Policies and IAM policies. Currently, the role we have set in the working instance, has read and write access to the S3 bucket. 
@@ -157,7 +157,7 @@ You can go back to the terminal and stop the server before entering in Part 3.
 
 ---
 
-### Part 3 - Working with Key Policies
+### Working with Key Policies
 
 Key policies are the primary resource for controlling "who" has access to do "what" with your CMKs.
 You have a full description about them in the following [AWS KMS link](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html), in case you want to go deeper - and for the importance of the topic,  you should. 
@@ -394,7 +394,7 @@ In this key policy, we don´t allow certain very sensitive operations to take pl
 ---
 
 
-### Part 4 - VPC Endpoints and Key Policies
+### VPC Endpoints and Key Policies
 
 Resources can communicate with AWS KMS through a VPC private endpoint.
 A VPC endpoint enables you to privately connect your VPC to supported AWS services and VPC endpoint services powered by PrivateLink without requiring an internet gateway, NAT device, VPN connection, or AWS Direct Connect connection. 
@@ -460,7 +460,7 @@ With that key policy, an extra layer of protection the key would be established,
 
 
 
-### Part 5 - Key Tagging
+### Key Tagging
 
 Tagging is an important strategy for managning CMKs in AWS KMS.
 You can add, change, and delete tags for customer managed CMKs. Each tag consists of a tag key and a tag valuethat you define.
