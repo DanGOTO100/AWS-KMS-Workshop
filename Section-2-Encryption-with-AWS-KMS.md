@@ -91,7 +91,7 @@ $ aws kms generate-data-key --key-id alias/ImportedCMK --key-spec AES_256 --encr
 }
 ```
 
-Please note the command used a new parameter: "**encryption-context**". This is an optional key-pair  value that provides additional context about the data and that needs to be provided as well when decrypting the data. This is because, when provided, it is bound to the criptographic operation.
+Please note the command used a new parameter: "**encryption-context**". This is an optional key-pair  value that provides additional context about the data and that needs to be provided as well when decrypting the data. This is because, when provided, it is bound to the cryptographic operation.
 
 Encryption Context, besides helping with the integrity of the encrypted data, it has many other uses. For example: use it to set policies, to provide Grants or to monitor encrypt/decrypt operations in CloudTrail (will see later in this section).
 See **additional information about encryption context** in [this part of the AWS KMS  documentation](https://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html).
@@ -200,7 +200,7 @@ In AWS there are main two main procedures to protect your data at rest: **Client
 
 For example in Amazon S3, You can encrypt your data before uploading it into the Amazon S3 Service (client side encryption) or encrypt once the data is there (server side encryption). More details in this [link to the S3 documentation](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingEncryption.html). A similar approach can be taken in other services like Amazon DynamoDB, see [details here](https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/client-server-side.html).
 
-The envelop **encryption mechanism** just described in previous section is the mechanism behind the Server Side Encryption that takes place in the AWS services that use AWS KMS. There are very good descriptions on how AWS KMS is being used by different AWS services in this part of the [AWS KMS documentation here](https://docs.aws.amazon.com/kms/latest/developerguide/service-integration.html).
+The envelope **encryption mechanism** just described in previous section is the mechanism behind the Server Side Encryption that takes place in the AWS services that use AWS KMS. There are very good descriptions on how AWS KMS is being used by different AWS services in this part of the [AWS KMS documentation here](https://docs.aws.amazon.com/kms/latest/developerguide/service-integration.html).
 
 For the workshop, let's see an example of attaching a disk to our working instance. We will encrypt it with AWS KMS and the CMK we have created importing our key material, its alias was "**ImportedCMK**".
 
@@ -219,7 +219,7 @@ Ensure also that you have clicked the "**Encryption**" checkbox. Then select the
 
 <**Figure-3**>
 
-Create a tag for the volume, for example a key-pair like: **Name-WorkshopEB**S.
+Create a tag for the volume, for example a key-pair like: **Name-WorkshopEBS**.
 Click on "**Create volume**" at the right bottom of the screen. The volume will start being created and will be ready to be attached to the instance in a few seconds. 
 
 We have now a encrypted volume that can be attached to our instance.
